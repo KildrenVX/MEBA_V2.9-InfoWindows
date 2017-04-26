@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MEBA</string>
+    <string name="textviewSaludo">HOLA PERFIL</string>
+    <string name="NombrePErfil">Sebastian</string>
+    <string name="nivel">Nivel:</string>
+    <string name="nivelnum">12</string>
+    <string name="Editarp">Editar Perfil</string>
+    <string name="Historial">Historial</string>
+    <string name="mensajes">Bandeja de entrada</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="title_activity_ver__pi">Ver_PI</string>
+</resources>
