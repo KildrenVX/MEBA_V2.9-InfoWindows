@@ -1,12 +1,16 @@
 package com.example.m.meba_v2.View;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -16,6 +20,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -55,9 +60,8 @@ public class Ver_PI extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode==200){
-                    Log.e("respuesta", new String(responseBody));
-                    cargarLista(obtDatosJSON(new String(responseBody)));
-                    //obtDatosJSON(new String(responseBody));
+                        cargarLista(obtDatosJSON(new String(responseBody)));
+                        //obtDatosJSON(new String(responseBody));
                 }
             }
 
@@ -70,18 +74,16 @@ public class Ver_PI extends AppCompatActivity {
     }
 
     public  void cargarLista(ArrayList<String> datos){
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
-        lista.setAdapter(adapter);
+
 
     }
 
     public ArrayList<String> obtDatosJSON(String response){
-        Log.e("response", response.toString());
+        Log.e("response", response);
         ArrayList<String> listado = new ArrayList<String>();
         try{
-
             JSONArray jsonArray = new JSONArray(response);
+
             String texto = "";
             for (int i=0;i<jsonArray.length();i++){
                 texto = jsonArray.getJSONObject(i).getString("PunTitulo")+" "+
@@ -91,8 +93,10 @@ public class Ver_PI extends AppCompatActivity {
                 listado.add(texto);
             }
             Log.e("mensajeeeee", texto.toString());
+
+            return listado;
         }catch(Exception e){
-            e.printStackTrace();
+            Log.e("error",e.toString());
         }
         return listado;
     }
