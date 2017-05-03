@@ -53,10 +53,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".View.MainActivity" />
         </activity>
-        <activity
-            android:name=".View.Ver_PI"
-            android:label="@string/title_activity_ver__pi"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".View.ver_pi"></activity>
     </application>
 
 </manifest>

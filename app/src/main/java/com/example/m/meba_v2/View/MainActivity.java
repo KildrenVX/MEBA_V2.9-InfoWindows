@@ -81,8 +81,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Ver_PI.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, Ver_PI.class);
+                //startActivity(intent);
 
              /*   mMap.clear();
 
@@ -287,8 +287,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
          //accion al tocar el info windows
          Toast.makeText(this, "mostrar detalle del punto de interes ", Toast.LENGTH_LONG).show();
 
-         Intent intent = new Intent(MainActivity.this, Ver_PI.class);
-         startActivity(intent);
+         //Intent intent = new Intent(MainActivity.this, Ver_PI.class);
+         //startActivity(intent);
 
      }
  }
