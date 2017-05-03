@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/Nombre_PI"
+                android:hint="Nombre_PI"
                 android:inputType="textPersonName" />
 
             <ExpandableListView
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
-                android:text="@string/Agregar_Archivo"
+                android:text="Agregar_Archivo"
                 android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
             <EditText
@@ -72,7 +72,7 @@
                     android:layout_weight="0.48"
                     android:paddingLeft="@dimen/fab_actions_spacing"
                     android:background="@color/colorAccent"
-                    android:text="@string/CancerPI"
+                    android:text="CancerPI"
                     android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
                 <Button
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.44"
                     android:background="@color/colorAccent"
-                    android:text="@string/AgreagarPI"
+                    android:text="AgreagarPI"
                     android:textColor="@color/common_google_signin_btn_text_dark_default"
                     tools:ignore="ButtonStyle"
                     android:onClick="Click"

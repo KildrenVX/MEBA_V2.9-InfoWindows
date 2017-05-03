@@ -69,14 +69,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    public String enviarDatosGET(String usu,String pas)
+    public String enviarDatosGET(String usuario,String password)
     {
         URL url = null;
         String linea="";
         int respuesta=0;
         StringBuilder resul=null;//recive la data
         try {
-            url = new URL("http://192.168.0.14:80/Login.php?usu="+usu+"&pas="+pas);//la IP es mi PC , se requiere cambiarla
+            url = new URL("http://meba.esy.es/meba_connect/login.php?Nombre="+usuario+"&Pass="+password);//dirrecion url del servidor
+            //http://meba.esy.es/meba_connect/login.php?Nombre="+usuario+"&Pass="+password
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();//al momento que la data sale, puede retornar una respuesta
             respuesta = connection.getResponseCode(); // si devuelve una respues lo guardamos en una variable
 
@@ -86,10 +87,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 InputStream in = new BufferedInputStream(connection.getInputStream());//TOMAMOS LA RESPUESTA
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));//leemos la respuesta
 
-                //LLENAMOS LA VARIABLE "resul" con el dato que emos traido
+                //LLENAMOS LA VARIABLE "resul" con el dato que hemos traido
                 while ((linea=reader.readLine())!=null)
                 {
-                    resul.append(linea);//agregamos casa linia q retorne
+                    resul.append(linea);//agregamos cada linea que retorne
 
                 }
 

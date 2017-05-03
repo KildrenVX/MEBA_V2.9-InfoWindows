@@ -31,7 +31,7 @@ public class Agregar_PI extends AppCompatActivity {
 
         listView =(ExpandableListView)findViewById(R.id.Listas);
         initData();
-        listAdapter = new ExpandableListAdapter(this,ListaDatHaper,listHash);
+        //listAdapter = new ExpandableListAdapter(this,ListaDatHaper,listHash);
         listView.setAdapter(listAdapter);
 
     }
