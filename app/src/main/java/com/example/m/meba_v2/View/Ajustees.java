@@ -17,7 +17,8 @@ public class Ajustees extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
+        Log.e("asd","toñitoooooooooo");
+        Log.i("asd","toñito");
         Log.e("asd","toñitoooooooooo");
     }
 }
