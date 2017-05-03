@@ -11,6 +11,9 @@ public class Lugares {
         String Titulo = "PunTitulo";
         String Descripcion = "PunDescripcion";
         String Valorizacion = "PunValorizacion";
+
+
     }
+
 
 }

@@ -31,7 +31,7 @@ public class Ver_PI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver__pi);
+        setContentView(R.layout.content_ver__pi);
         lista = (ListView) findViewById(R.id.listView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,6 +41,7 @@ public class Ver_PI extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ObjDatos();
                 Snackbar.make(view, "soy un boton flotante ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -74,7 +75,9 @@ public class Ver_PI extends AppCompatActivity {
     }
 
     public  void cargarLista(ArrayList<String> datos){
-
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
+        lista.setAdapter(adapter);
 
     }
 
