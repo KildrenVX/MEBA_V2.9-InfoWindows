@@ -9,4 +9,8 @@
     <string name="mensajes">Bandeja de entrada</string>
     <string name="ajustes">Ajustes</string>
     <string name="title_activity_ver__pi">Ver_PI</string>
+    <string name="NamePI" />
+    <string name="ParrafoPI" />
+    <string name="veranecdotas" />
+    <string name="agregaranec" />
 </resources>
