@@ -19,4 +19,9 @@
 
     <style name="Titulo"></style>
 
+    <style name="Menu_fondo">
+        <item name="android:background">@drawable/fa_draw_selec_perfi</item>
+        <item name="android:textColor">#ffff</item>
+    </style>
+
 </resources>

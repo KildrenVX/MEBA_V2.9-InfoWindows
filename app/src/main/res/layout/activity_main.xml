@@ -18,21 +18,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/MENU"
-        android:layout_margin="16dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         app:fab_addButtonColorNormal="@color/colorAccent"
+        app:fab_labelStyle="@style/Menu_fondo"
 
-        >
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Perfil"
-        app:fab_icon="@drawable/ic_person_black_24dp"
-        app:fab_colorNormal="@color/colorAccent"
-        />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Perfil"
+            app:fab_icon="@drawable/ic_person_black_24dp"
+            app:fab_colorNormal="@color/colorAccent"
+            app:fab_title="Perfil"
+            app:fab_size="mini"
+
+            />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
@@ -40,6 +46,8 @@
             android:id="@+id/Lugares"
             app:fab_icon="@drawable/ic_location_on_black_24dp"
             app:fab_colorNormal="@color/colorAccent"
+            app:fab_title="Tus Lugares"
+            app:fab_size="mini"
             />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -48,16 +56,22 @@
             android:id="@+id/Ajustes"
             app:fab_icon="@drawable/ic_build_black_24dp"
             app:fab_colorNormal="@color/colorAccent"
+            app:fab_title="Ajustes"
+            app:fab_size="mini"
             />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/LugarNuevo"
-            app:fab_icon="@drawable/ic_build_black_24dp"
+            app:fab_icon="@drawable/ic_add_location_black_24dp"
             app:fab_colorNormal="@color/colorAccent"
+            app:fab_title="Agregar Lugar"
+            app:fab_size="mini"
             />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
 
 </RelativeLayout>
