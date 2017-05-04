@@ -96,4 +96,10 @@
         android:text="@string/mensajes"
         android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
+    <Button
+        android:id="@+id/Ingreso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingreso " />
+
 </LinearLayout>

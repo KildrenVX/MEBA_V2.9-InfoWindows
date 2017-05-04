@@ -53,7 +53,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".View.MainActivity" />
         </activity>
-        <activity android:name=".View.ver_pi" />
+
+
         <activity android:name=".View.Login"></activity>
     </application>
 

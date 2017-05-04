@@ -172,34 +172,37 @@ import com.google.android.gms.maps.model.MarkerOptions;
      }
 
      @Override
-     public void onRequestPermissionsResult(int requestCode,
-                                            String permissions[], int[] grantResults) {
-         switch (requestCode) {
-             case MY_PERMISSIONS_REQUEST_LOCATION: {
-                 // Si la consulta es cancelada los arreglos estaran vacios
-                 if (grantResults.length > 0
-                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+     public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+          try {
+              switch (requestCode) {
+                  case MY_PERMISSIONS_REQUEST_LOCATION: {
+                      // Si la consulta es cancelada los arreglos estaran vacios
+                      if (grantResults.length > 0
+                              && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                     // permiso concedido
-                     if (ContextCompat.checkSelfPermission(this,
-                             Manifest.permission.ACCESS_FINE_LOCATION)
-                             == PackageManager.PERMISSION_GRANTED) {
+                          // permiso concedido
+                          if (ContextCompat.checkSelfPermission(this,
+                                  Manifest.permission.ACCESS_FINE_LOCATION)
+                                  == PackageManager.PERMISSION_GRANTED) {
 
 
-                         mMap.setMyLocationEnabled(true);
-                     }
+                              mMap.setMyLocationEnabled(true);
+                          }
 
-                 } else {
+                      } else {
 
-                     // Permiso denegado
-                     Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
-                 }
-                 return;
-             }
+                          // Permiso denegado
+                          Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
+                      }
+                      return;
+                  }
 
-             // agregar mas case para mas permisos(wifi,contactos,etc)
+                  // agregar mas case para mas permisos(wifi,contactos,etc)
 
-         }
+              }
+          }catch (Exception e){
+              e.printStackTrace();
+          }
      }
      @Override
      public void onConnected(@Nullable Bundle bundle) {
@@ -231,8 +234,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
          //opening position with some zoom level in the map
          mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
-
-
      }
 
      public void BotonMarcador(Location location){
@@ -273,7 +274,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
          view.findViewById(R.id.txtTitulo);
          view.findViewById(R.id.txtDescripcion);
          view.findViewById(R.id.txtDescripcion);
-
          return  view;
      }
 
