@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:ems="10"
-            android:hint="name"
+            android:hint="Correo"
             android:inputType="textPersonName" />
 
         <EditText
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:ems="10"
-            android:hint="pass"
+            android:hint="Contraseña"
             android:inputType="textPassword"
             tools:ignore="LabelFor" />
 
@@ -50,6 +50,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="boton" />
+            android:text="Ingresar" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

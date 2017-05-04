@@ -12,9 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.m.meba_v2.R;
 import com.loopj.android.http.AsyncHttpClient;
@@ -38,19 +38,33 @@ public class Perfil extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         ImafPerCir();
 
+        final Intent login = new Intent(this, Login.class);
         asd = (TextView) findViewById(R.id.textView2);
-
         btnLog=(Button)findViewById(R.id.btnlog);
-        btnLog.setOnClickListener((View.OnClickListener) this);
+        Bundle datos = this.getIntent().getExtras();
+        int asd = datos.getInt("datos");
+        Log.e("ID",Integer.toString(asd));
+        if (asd >= 0){
+            ObjDatos(asd);
+        }else{
+            Toast.makeText(this, "no me acuerdo para que hice esto xD", Toast.LENGTH_SHORT).show();
+        }
 
-        ObjDatos();
+
+        btnLog.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(login);
+                //seba no invente xD
+            }
+        });
      }
 
-     public void ObjDatos(){
+
+     public void ObjDatos(int ID){
          //conexion a http
          AsyncHttpClient client = new AsyncHttpClient();
-         String url="http://meba.esy.es/meba_connect/get_all_Users.php";
-
+         String url="http://meba.esy.es/meba_connect/get_User_Id.php?ID="+ID;
+            Log.e("url",url.toString());
          //envio de parametros
          //RequestParams parametros = new RequestParams();
          //parametros.put("Edad",18);
@@ -74,25 +88,15 @@ public class Perfil extends AppCompatActivity {
 
 
 
-     public ArrayList<String> obtDatosJSON(String response){
+     public void obtDatosJSON(String response){
          Log.e("response", response.toString());
-         ArrayList<String> listado = new ArrayList<String>();
          try{
-
              JSONArray jsonArray = new JSONArray(response);
-             String texto;
-             asd.setText(jsonArray.getJSONObject(2).getString("usuNombre"));
-             for (int i=0;i<jsonArray.length();i++){
-                 texto = jsonArray.getJSONObject(i).getString("usuNombre")+" "+
-                         jsonArray.getJSONObject(i).getString("usuCorreo")+" "+
-                         jsonArray.getJSONObject(i).getString("usuSexo");
-                 Log.e("mensaje", texto.toString());
-                 listado.add(texto);
-             }
+             asd.setText(jsonArray.getJSONObject(0).getString("usuNombre"));
          }catch(Exception e){
-             e.printStackTrace();
+
+             Log.e("error json", e.toString());
          }
-         return listado;
      }
 
 
