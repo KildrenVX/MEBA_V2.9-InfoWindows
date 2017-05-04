@@ -84,10 +84,6 @@ public class Perfil extends AppCompatActivity {
              }
          });
      }
-
-
-
-
      public void obtDatosJSON(String response){
          Log.e("response", response.toString());
          try{
@@ -98,14 +94,6 @@ public class Perfil extends AppCompatActivity {
              Log.e("error json", e.toString());
          }
      }
-
-
-
-
-
-
-
-
     public void ImafPerCir ()
     {
         //extraemos el drawable en un bitmap
@@ -124,9 +112,6 @@ public class Perfil extends AppCompatActivity {
         imageView.setImageDrawable(roundedDrawable);
 
     }
-
-
-
 
     public void Logclick(View view)
     {

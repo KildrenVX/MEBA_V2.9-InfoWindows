@@ -52,4 +52,14 @@
             android:layout_marginTop="30dp"
             android:text="Ingresar" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/registro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrarce"
+        android:layout_marginTop="30dp"
+        android:textColor="#0368ff"
+        android:gravity="center"
+        />
+
 </android.support.constraint.ConstraintLayout>

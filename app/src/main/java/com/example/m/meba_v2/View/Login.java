@@ -27,26 +27,6 @@ import java.net.URL;
 
 public class Login extends AppCompatActivity {
 
-    Button btnIngresar;
-    EditText txtUso,txtPas;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        txtUso = (EditText)findViewById(R.id.txtusu);
-        txtPas = (EditText)findViewById(R.id.txtpass);
-        btnIngresar = (Button)findViewById(R.id.btningresas);
-        //btnIngresar.setOnClickListener(this);
-
-        btnIngresar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                json(txtUso.getText().toString(),txtPas.getText().toString());
-            }
-        });
-
-    }
-
     /*@Override
     public void onClick(View v) {
         Thread tr = new Thread()
@@ -165,6 +145,26 @@ public class Login extends AppCompatActivity {
 
             }
         });
+    }
+    Button btnIngresar;
+    EditText txtUso,txtPas;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        txtUso = (EditText)findViewById(R.id.txtusu);
+        txtPas = (EditText)findViewById(R.id.txtpass);
+        btnIngresar = (Button)findViewById(R.id.btningresas);
+        //btnIngresar.setOnClickListener(this);
+
+        btnIngresar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                json(txtUso.getText().toString(),txtPas.getText().toString());
+            }
+        });
+
     }
 
     public void envio(int ID){
