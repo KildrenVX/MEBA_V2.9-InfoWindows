@@ -1,5 +1,6 @@
 package com.example.m.meba_v2.View;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,8 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +28,8 @@ import java.util.ArrayList;
 public class Perfil extends AppCompatActivity {
 
     TextView asd;
+    Button btnLog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,9 @@ public class Perfil extends AppCompatActivity {
         ImafPerCir();
 
         asd = (TextView) findViewById(R.id.textView2);
+
+        btnLog=(Button)findViewById(R.id.btnlog);
+        btnLog.setOnClickListener((View.OnClickListener) this);
 
         ObjDatos();
      }
@@ -62,6 +70,7 @@ public class Perfil extends AppCompatActivity {
              }
          });
      }
+
 
 
 
@@ -110,5 +119,14 @@ public class Perfil extends AppCompatActivity {
 
         imageView.setImageDrawable(roundedDrawable);
 
+    }
+
+
+
+
+    public void Logclick(View view)
+    {
+        Intent i = new Intent(getApplicationContext(),Login.class);
+        startActivity(i);
     }
 }
