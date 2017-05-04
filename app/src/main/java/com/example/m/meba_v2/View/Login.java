@@ -33,7 +33,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         txtPas = (EditText)findViewById(R.id.txtpass);
         btnIngresar = (Button)findViewById(R.id.btningresas);
 
-
         btnIngresar.setOnClickListener(this);
 
     }
@@ -81,7 +80,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();//al momento que la data sale, puede retornar una respuesta
             respuesta = connection.getResponseCode(); // si devuelve una respues lo guardamos en una variable
 
-            resul=new StringBuilder();//Consumiendo el JSON en la respuesta
+            resul = new StringBuilder();//Consumiendo el JSON en la respuesta
+
+            Log.e("resultado", resul.toString());
+
             if(respuesta==200)
             {
                 InputStream in = new BufferedInputStream(connection.getInputStream());//TOMAMOS LA RESPUESTA

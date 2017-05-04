@@ -9,7 +9,9 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.m.meba_v2.R;
 import com.loopj.android.http.AsyncHttpClient;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 
 public class Perfil extends AppCompatActivity {
 
+    TextView asd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,8 @@ public class Perfil extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         ImafPerCir();
+
+        asd = (TextView) findViewById(R.id.textView2);
 
         ObjDatos();
      }
@@ -67,6 +72,7 @@ public class Perfil extends AppCompatActivity {
 
              JSONArray jsonArray = new JSONArray(response);
              String texto;
+             asd.setText(jsonArray.getJSONObject(2).getString("usuNombre"));
              for (int i=0;i<jsonArray.length();i++){
                  texto = jsonArray.getJSONObject(i).getString("usuNombre")+" "+
                          jsonArray.getJSONObject(i).getString("usuCorreo")+" "+

@@ -1,4 +1,4 @@
-package com.example.m.meba_v2.Data;
+package com.example.m.meba_v2.model;
 
 import android.graphics.drawable.Drawable;
 
