@@ -54,7 +54,7 @@
                 android:value=".View.MainActivity" />
         </activity>
         <activity android:name=".View.Login" />
-        <activity android:name=".Registro_User"></activity>
+        <activity android:name=".View.Registro_User"></activity>
     </application>
 
 </manifest>
