@@ -91,4 +91,11 @@ public class Login extends AppCompatActivity {
 
     }
 
+
+    public void Registroclick (View view)
+    {
+        Intent i = new Intent(this, Registro_User.class);
+        startActivity(i);
+    }
+
 }
