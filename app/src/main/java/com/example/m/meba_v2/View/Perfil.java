@@ -25,7 +25,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-public class Perfil extends AppCompatActivity {
+public class Perfil extends AppCompatActivity implements View.OnClickListener{
 
     TextView asd;
     Button btnLog;
@@ -117,5 +117,10 @@ public class Perfil extends AppCompatActivity {
     {
         Intent i = new Intent(getApplicationContext(),Login.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

@@ -57,10 +57,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:background="@color/colorAccent"
-        android:text="Inicio sesión"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:onClick="Logclick"
-        />
+        android:text="Inicio sesión"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     <Button
         android:id="@+id/edirpefil"
