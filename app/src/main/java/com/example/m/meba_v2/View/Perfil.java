@@ -23,8 +23,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.apache.http.Header;
 import org.json.JSONArray;
 
-import java.util.ArrayList;
-
 public class Perfil extends AppCompatActivity implements View.OnClickListener{
 
     TextView asd;
@@ -94,6 +92,8 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener{
              Log.e("error json", e.toString());
          }
      }
+
+
     public void ImafPerCir ()
     {
         //extraemos el drawable en un bitmap

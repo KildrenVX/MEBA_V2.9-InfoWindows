@@ -37,11 +37,11 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/sex"
+                android:id="@+id/sexo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="SEXO"
+                android:hint="Sexo"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -54,7 +54,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/passsr"
+                android:id="@+id/pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"

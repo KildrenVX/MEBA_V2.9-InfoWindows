@@ -145,6 +145,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
      public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
      public boolean checkLocationPermission(){
+
          if (ContextCompat.checkSelfPermission(this,
                  Manifest.permission.ACCESS_FINE_LOCATION)
                  != PackageManager.PERMISSION_GRANTED) {
