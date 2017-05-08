@@ -9,10 +9,11 @@
     android:minWidth="700px">
 
     <ImageView
+        android:id="@+id/imagen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="50"
-        app:srcCompat="@drawable/web_hi_res_512" />
+        app:srcCompat="@drawable/social" />
 
  <LinearLayout
     android:layout_height="match_parent"
