@@ -45,7 +45,9 @@
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkLocationPermission();
+        //checkLocationPermission();
+
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -179,28 +181,9 @@
 
 
      public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-     public boolean checkLocationPermission(){
-         if (ContextCompat.checkSelfPermission(this,
-                 Manifest.permission.ACCESS_FINE_LOCATION)
-                 != PackageManager.PERMISSION_GRANTED) {
-             //preguntar si el usuario necesita explicacion
-             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-                 // Mostrar explicacion del permiso
-                 ActivityCompat.requestPermissions(this,
-                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                         MY_PERMISSIONS_REQUEST_LOCATION);
-             } else {
-                 // pedir el permiso
-                 ActivityCompat.requestPermissions(this,
-                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                         MY_PERMISSIONS_REQUEST_LOCATION);
-             }
-             return false;
-         } else {
-             return true;
-         }
-     }
+
+
+
 
      @Override
      public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
@@ -230,6 +213,31 @@
               e.printStackTrace();
 
           }
+     }
+
+
+
+     public boolean checkLocationPermission(){
+         if (ContextCompat.checkSelfPermission(this,
+                 Manifest.permission.ACCESS_FINE_LOCATION)
+                 != PackageManager.PERMISSION_GRANTED) {
+             //preguntar si el usuario necesita explicacion
+             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                     Manifest.permission.ACCESS_FINE_LOCATION)) {
+                 // Mostrar explicacion del permiso
+                 ActivityCompat.requestPermissions(this,
+                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                         MY_PERMISSIONS_REQUEST_LOCATION);
+             } else {
+                 // pedir el permiso
+                 ActivityCompat.requestPermissions(this,
+                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                         MY_PERMISSIONS_REQUEST_LOCATION);
+             }
+             return false;
+         } else {
+             return true;
+         }
      }
      @Override
      public void onConnected(@Nullable Bundle bundle) {

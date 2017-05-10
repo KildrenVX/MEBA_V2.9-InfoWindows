@@ -25,9 +25,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBm1vM2FuoGPqCpOfXTC8XzxzRXPXpnw7Q" />
 
-        <activity android:name=".View.MainActivity">
-
-        </activity>
+        <activity android:name=".View.MainActivity"></activity>
         <activity
             android:name=".View.Perfil"
             android:parentActivityName=".View.MainActivity">
@@ -51,11 +49,13 @@
         </activity>
         <activity android:name=".View.Login" />
         <activity android:name=".View.Registro_User" />
-        <activity android:name=".View.Bienvenida"> <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".View.Bienvenida">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
