@@ -19,7 +19,7 @@ public class Registro_User extends AppCompatActivity  {
     Button btnRegistrar;// crear botones y campos de texto
     EditText txtNombre,txtSexo,txtCorreo,txtPass,txtConfirmPass,txtEdad;
 
-    public void json(String Correo, String Pass,int Edad, String Nombre , String Sexo){
+    public void json(String Correo, String Pass,String Edad, String Nombre , String Sexo){
         //conexion a http
         AsyncHttpClient client = new AsyncHttpClient();
         String url="http://meba.esy.es/meba_connect/create_User.php?Nombre="+Nombre+"&Pass="+Pass+
@@ -71,13 +71,12 @@ public class Registro_User extends AppCompatActivity  {
         txtPass = (EditText)findViewById(R.id.pass);
         txtConfirmPass = (EditText)findViewById(R.id.passr2);
         txtEdad = (EditText)findViewById(R.id.edadr);
-       final int Edad = Integer.parseInt(txtEdad.getText().toString());
 
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 json(txtCorreo.getText().toString(),txtPass.getText().toString(),
-                        Edad,txtNombre.getText().toString(),
+                        txtEdad.getText().toString(),txtNombre.getText().toString(),
                         txtSexo.getText().toString());
             }
         });
