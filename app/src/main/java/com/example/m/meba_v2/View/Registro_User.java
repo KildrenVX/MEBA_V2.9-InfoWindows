@@ -10,6 +10,7 @@ import android.widget.EditText;
 import com.example.m.meba_v2.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 
@@ -25,15 +26,14 @@ public class Registro_User extends AppCompatActivity  {
                 "&Edad="+Edad+"&Correo="+Correo+"&Sexo="+Sexo; // envia parametros po la URL
         Log.e("probando y que saen", url.toString());
 
-      /*  RequestParams parametros = new RequestParams();
+       RequestParams parametros = new RequestParams();
         parametros.put("Nombre",Nombre);
         parametros.put("Pass",Pass);
         parametros.put("Edad",Edad);
         parametros.put("Correo",Correo);
         parametros.put("Sexo",Sexo);
-*/
 
-        client.post(url, null, new AsyncHttpResponseHandler() {
+        client.post(url, parametros, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 200) {
