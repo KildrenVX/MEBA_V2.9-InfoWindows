@@ -237,22 +237,15 @@
 
      @Override
      public void onLocationChanged(Location location) {
-        /* mMap.clear();
+        // mMap.clear();
 
          LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-
-       MarkerOptions markerOptions = new MarkerOptions();
-         markerOptions.position(latLng);
-         markerOptions.title("Mi lugar");
-         //agregar marcador al mapa
-         mMap.addMarker(markerOptions);
-
          //abrir en la posicion del marcador con zoom
          mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
-         */
+
      }
 
-     public void BotonMarcador(Location location){
+    /* public void BotonMarcador(Location location){
          mMap.clear();
 
          LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
@@ -268,6 +261,7 @@
 
      }
 
+*/
      @Override
      public void onStatusChanged(String provider, int status, Bundle extras) {
 
@@ -289,8 +283,8 @@
          View view = inflater.inflate(R.layout.info_windows,null,false);
          view.findViewById(R.id.txtTitulo);
          view.findViewById(R.id.txtDescripcion);
-         view.findViewById(R.id.txtDireccion);
-         view.findViewById(R.id.imagen);
+         //view.findViewById(R.id.txtDireccion);
+        // view.findViewById(R.id.imagen);
          return  view;
      }
 
@@ -305,9 +299,14 @@
      public void onInfoWindowClick(Marker marker) {
          //accion al tocar el info windows
          Toast.makeText(this, "mostrar detalle del punto de interes ", Toast.LENGTH_LONG).show();
+try {
+    Intent intent = new Intent(MainActivity.this, Ver_PI.class);
+    startActivity(intent);
+}catch (Exception e){
+    e.printStackTrace();
+    Log.i("clikeo infowindows ",e.toString());
+}
 
-        Intent intent = new Intent(this,Detalle_punto_de_interes.class);
-        startActivity(intent);
 
      }
  }
