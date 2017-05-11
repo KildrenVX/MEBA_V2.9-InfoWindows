@@ -86,23 +86,7 @@
 
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(MainActivity.this, Ver_PI.class);
-                //startActivity(intent);
 
-             /*   mMap.clear();
-
-                Location location = new Location("");
-
-                LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title("Lugar creado con floating button");
-                mMap.addMarker(markerOptions);
-*/
-
-                 //  Intent intent = new Intent(MainActivity.this,LugaresFavoritos.class);
-               // startActivity(intent);
             }
         });
 
@@ -112,38 +96,36 @@
      public void onMapReady(final GoogleMap googleMap) {
          mMap=googleMap;
          mMap.setMapType(googleMap.MAP_TYPE_HYBRID);
-         mMap.setMyLocationEnabled(true);
+         mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
 
          LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
          mMap.addMarker(new MarkerOptions().position(MiCasa).title("Esta es mi casa"));
          mMap.moveCamera(CameraUpdateFactory.newLatLng(MiCasa));
          mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));
 
-
-         LatLng LaU = new LatLng(-33.405845, -70.682372);
-         mMap.addMarker(new MarkerOptions().position(LaU).title("Esto es Inacap"));
-
          CameraUpdate zoom= CameraUpdateFactory.zoomTo(15);
          mMap.animateCamera(zoom);
+         //---------permiso de localizacion--------------------------------------------------
          if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                  != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                  != PackageManager.PERMISSION_GRANTED) {
              return;
          }
-
+          //-----------------------------------------------------------------------------------
 
         /* mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
              @Override
              public void onMapClick(LatLng latLng) {
-                 //muestra coordenadas de posicion tocada dentro del mapa
-                 Toast.makeText(getApplicationContext(), latLng.toString(), Toast.LENGTH_LONG).show();
-
+             //muestra coordenadas de posicion tocada dentro del mapa
+              Toast.makeText(getApplicationContext(), latLng.toString(), Toast.LENGTH_LONG).show();
              }
          });
          */
+
+        //----Agregar Marcador----------------------------------------------------------------------------------
          Toast.makeText(this, "Manten presionado en un lugar del mapa para agregar marcador", Toast.LENGTH_LONG).show();
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener(){
-            AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);
+         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener(){
+            AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);//dialogo de alerta
              @Override
              public void onMapLongClick(final LatLng latLng) {
                  //muestra coordenadas de posicion tocada dentro del mapa
@@ -170,20 +152,18 @@
 
              }
          });
+        //------------------------------------------------------------------------------------------------------
 
-
-         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);// manipulacion de localizacion
          locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, this);
 
-         mMap.setInfoWindowAdapter(this);
-         mMap.setOnInfoWindowClickListener(this);
+         mMap.setInfoWindowAdapter(this);//adaptar las ventanas de informacion
+         mMap.setOnInfoWindowClickListener(this);//infowindows click
      }
 
 
+ //---------------------TIEMPO:DE_ESPERA_DE_ACTIVAR_EL_GPS-----------------------------------------------
      public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
-
-
 
      @Override
      public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
@@ -214,7 +194,7 @@
 
           }
      }
-
+//-------------------------------------------------------------------------------------------------------
 
 
      public boolean checkLocationPermission(){
@@ -319,13 +299,15 @@
          return null;
      }
 
+
+
      @Override
      public void onInfoWindowClick(Marker marker) {
          //accion al tocar el info windows
          Toast.makeText(this, "mostrar detalle del punto de interes ", Toast.LENGTH_LONG).show();
 
-         Intent intent = new Intent(MainActivity.this, Detalle_punto_de_interes.class);
-         startActivity(intent);
+        Intent intent = new Intent(this,Detalle_punto_de_interes.class);
+        startActivity(intent);
 
      }
  }
