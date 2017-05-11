@@ -63,7 +63,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    Button btnIngresar;
+    Button btnIngresar, btnRegistro;
     EditText txtUso,txtPas;
 
     @Override
@@ -74,6 +74,8 @@ public class Login extends AppCompatActivity {
         txtUso = (EditText)findViewById(R.id.txtusu);
         txtPas = (EditText)findViewById(R.id.txtpass);
         btnIngresar = (Button)findViewById(R.id.btningresas);
+        btnRegistro = (Button)findViewById(R.id.btnregistrar);
+
         //btnIngresar.setOnClickListener(this);
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
@@ -81,9 +83,21 @@ public class Login extends AppCompatActivity {
                 json(txtUso.getText().toString(),txtPas.getText().toString());
             }
         });
+        try {
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+          public void onClick(View v){
+
+                    Intent i = new Intent(Login.this,Registro_User.class);
+                    startActivity(i);
 
 
+            }
+        });
 
+        }catch (Exception e)
+        {
+            Log.i("ALGO paso en esta cosa:",e.toString());
+        }
     }
 
     public void envio(int ID){
@@ -93,11 +107,12 @@ public class Login extends AppCompatActivity {
 
     }
 
-
-    public void Registroclick (View view)
+    public void Clickr(View view)
     {
-        Intent i = new Intent(this, Registro_User.class);
+        Intent i = new Intent(this,Registro_User.class);
         startActivity(i);
     }
+
+
 
 }

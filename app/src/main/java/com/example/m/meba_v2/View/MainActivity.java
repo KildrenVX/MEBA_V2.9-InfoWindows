@@ -56,8 +56,9 @@
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
+                try
+                {Intent intent = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);}catch (Exception e){Log.i("ALGO PASO AQUI",e.toString());}
             }
         });
 
@@ -98,10 +99,10 @@
          mMap.setMapType(googleMap.MAP_TYPE_HYBRID);
          mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
 
-         LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
+       /*  LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
          mMap.addMarker(new MarkerOptions().position(MiCasa).title("Esta es mi casa"));
          mMap.moveCamera(CameraUpdateFactory.newLatLng(MiCasa));
-         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));
+         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));*/
 
          CameraUpdate zoom= CameraUpdateFactory.zoomTo(15);
          mMap.animateCamera(zoom);
@@ -235,17 +236,19 @@
 
      }
 
+//---------------------CENTRA_A_LA_LOCALIZACION_ACTUAL----------------------------------------------
      @Override
      public void onLocationChanged(Location location) {
-        // mMap.clear();
+         mMap.clear();
 
          LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
          //abrir en la posicion del marcador con zoom
          mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
 
      }
+//-------------------------------------------------------------------------------------------------
 
-    /* public void BotonMarcador(Location location){
+     /*public void BotonMarcador(Location location){
          mMap.clear();
 
          LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
@@ -255,13 +258,10 @@
          markerOptions.title("Marcador en mi posicion actual");
 
          mMap.addMarker(markerOptions);
-
-
          mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
 
-     }
+     }*/
 
-*/
      @Override
      public void onStatusChanged(String provider, int status, Bundle extras) {
 
@@ -277,24 +277,27 @@
 
      }
 
+//-------------------CARGA_UN_INFO_WINDOWS----------------------------------------------------
      @Override
      public View getInfoWindow(Marker marker) {
          LayoutInflater inflater = LayoutInflater.from(this);
          View view = inflater.inflate(R.layout.info_windows,null,false);
          view.findViewById(R.id.txtTitulo);
          view.findViewById(R.id.txtDescripcion);
-         //view.findViewById(R.id.txtDireccion);
-        // view.findViewById(R.id.imagen);
+         view.findViewById(R.id.txtDireccion);
+         view.findViewById(R.id.imagen);
          return  view;
      }
+//--------------------------------------------------------------------------------------------
 
+//----------------------CONTENIDO_DEL_INFO_WINDOWS--------------------------------------------
      @Override
      public View getInfoContents(Marker marker) {
          return null;
      }
+//---------------------------------------------------------------------------------------------
 
-
-
+//--------------------ACCION_AL_TOCAR:EL_INFO_WINDOWS-------------------------------------------
      @Override
      public void onInfoWindowClick(Marker marker) {
          //accion al tocar el info windows
@@ -310,3 +313,4 @@ try {
 
      }
  }
+

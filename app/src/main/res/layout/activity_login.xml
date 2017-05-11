@@ -58,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="registrarce"
-            android:onClick="Registroclick"
+            android:onClick="Clickr"
+
             />
     </LinearLayout>
 
