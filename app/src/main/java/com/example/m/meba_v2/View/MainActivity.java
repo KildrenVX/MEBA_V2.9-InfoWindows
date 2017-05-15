@@ -304,7 +304,6 @@ try {
     startActivity(intent);
 }catch (Exception e){
     e.printStackTrace();
-    Log.i("clikeo infowindows ",e.toString());
 }
 
 
