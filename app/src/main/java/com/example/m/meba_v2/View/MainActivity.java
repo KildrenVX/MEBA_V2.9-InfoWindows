@@ -38,6 +38,10 @@
  import org.apache.http.Header;
  import org.json.JSONArray;
 
+ import java.lang.reflect.Array;
+ import java.util.ArrayList;
+ import java.util.List;
+
  public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
          GoogleApiClient.ConnectionCallbacks,
          GoogleApiClient.OnConnectionFailedListener,
@@ -51,7 +55,6 @@
         setContentView(R.layout.activity_main);
 
         //checkLocationPermission();
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -103,6 +106,8 @@
          mMap=googleMap;
          mMap.setMapType(googleMap.MAP_TYPE_HYBRID);
          mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
+
+         CargarPI();
 
        /*  LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
          mMap.addMarker(new MarkerOptions().position(MiCasa).title("Esta es mi casa"));
@@ -207,40 +212,47 @@
 
 //------------------------------------------CARGAR_PI____________________________________________________
 
-     public void CArgarPI ()
+     public ArrayList<String> CargarPI ()
      {
-         for( int d = 0;d<=0;d++)
-         {
-             //conexion a http
-             AsyncHttpClient client = new AsyncHttpClient();
-             String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+d;
-             client.post(url, null, new AsyncHttpResponseHandler() {
-                 @Override
-                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                     if (statusCode == 200) {
-                         String resul = new String(responseBody);
-                         Log.e("estoy", "aqui");
-                         try {
-                             Log.e("estoy", "aqui2");
-                             JSONArray jsonArray = new JSONArray(resul);
-                             int ID = Integer.parseInt(jsonArray.getJSONObject(0).getString("PunId"));
-                             //int lar =Intent.parseIntent(jsonArray.getJSONArray(1).getString("PunLatitud"));
-                             //  envio(ID);
+         //conexion a http
+         AsyncHttpClient client = new AsyncHttpClient();
+         String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+1;
+         client.post(url, null, new AsyncHttpResponseHandler() {
+             @Override
+             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                 if (statusCode == 200) {
+                     String resul = new String(responseBody);
+                     Log.e("estoy", "aqui");
+                     Log.e("json", resul);
+                     try {
 
-                         } catch (Exception e) {
-                         /*Toast.makeText(Login.this, "Usuario no existe.", Toast.LENGTH_SHORT).show();
-                         txtUso.setText("");
-                         txtPas.setText("");*/
-                         }
+                         JSONArray jsonArray = new JSONArray(resul);
+                         String ID = jsonArray.getJSONObject(0).getString("PunId");
+                         String lat = jsonArray.getJSONObject(0).getString("PunLatitud");
+                         String log = jsonArray.getJSONObject(0).getString("PunLongitud");
+                         String Titulo = jsonArray.getJSONObject(0).getString("PunTitulo");
+                         String descrip = jsonArray.getJSONObject(0).getString("PunDescripcion");
+                         String valor = jsonArray.getJSONObject(0).getString("PunValorizacion");
+
+                         ArrayList<String> Punto = new ArrayList<String>();
+                         Punto.add(ID);
+                         Punto.add(lat);
+                         Punto.add(log);
+                         Punto.add(Titulo);
+                         Punto.add(descrip);
+                         Punto.add(valor);
+                         
+                     } catch (Exception e) {
+                     Log.e("error", e.toString());
                      }
                  }
+             }
 
-                 @Override
-                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+             @Override
+             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
-                 }
-             });
-         }
+             }
+         });
 
      }
 //________________________________________________________________________________________________________
@@ -350,8 +362,6 @@
          //accion al tocar el info windows
          Toast.makeText(this, "mostrar detalle del punto de interes ", Toast.LENGTH_LONG).show();
 try {
-    Intent intent = new Intent(MainActivity.this, Ver_PI.class);
-    startActivity(intent);
 }catch (Exception e){
     e.printStackTrace();
 }

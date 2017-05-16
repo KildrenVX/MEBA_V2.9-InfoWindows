@@ -104,7 +104,7 @@ public class Login extends AppCompatActivity {
         Intent perfil = new Intent(this, Perfil.class);
         perfil.putExtra("datos", ID);
         startActivity(perfil);
-
+    //listo ya no sigo mas xD ahora sus lolasos x
     }
 
     public void Clickr(View view)
