@@ -1,46 +1,37 @@
  package com.example.m.meba_v2.View;
 
  import android.Manifest;
- import android.app.AlertDialog;
- import android.content.Context;
- import android.content.DialogInterface;
- import android.content.Intent;
- import android.content.pm.PackageManager;
- import android.location.Location;
- import android.location.LocationListener;
- import android.location.LocationManager;
- import android.os.Bundle;
- import android.support.annotation.NonNull;
- import android.support.annotation.Nullable;
- import android.support.v4.app.ActivityCompat;
- import android.support.v4.app.FragmentActivity;
- import android.support.v4.content.ContextCompat;
- import android.util.Log;
- import android.view.LayoutInflater;
- import android.view.View;
- import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Toast;
 
- import com.example.m.meba_v2.R;
- import com.getbase.floatingactionbutton.FloatingActionButton;
- import com.google.android.gms.common.ConnectionResult;
- import com.google.android.gms.common.api.GoogleApiClient;
- import com.google.android.gms.maps.CameraUpdate;
- import com.google.android.gms.maps.CameraUpdateFactory;
- import com.google.android.gms.maps.GoogleMap;
- import com.google.android.gms.maps.OnMapReadyCallback;
- import com.google.android.gms.maps.SupportMapFragment;
- import com.google.android.gms.maps.model.LatLng;
- import com.google.android.gms.maps.model.Marker;
- import com.google.android.gms.maps.model.MarkerOptions;
- import com.loopj.android.http.AsyncHttpClient;
- import com.loopj.android.http.AsyncHttpResponseHandler;
-
- import org.apache.http.Header;
- import org.json.JSONArray;
-
- import java.lang.reflect.Array;
- import java.util.ArrayList;
- import java.util.List;
+import com.example.m.meba_v2.R;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
  public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
          GoogleApiClient.ConnectionCallbacks,
@@ -104,15 +95,15 @@
      @Override
      public void onMapReady(final GoogleMap googleMap) {
          mMap=googleMap;
-         mMap.setMapType(googleMap.MAP_TYPE_HYBRID);
+         mMap.setMapType(googleMap.MAP_TYPE_NORMAL);
          mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
 
-         CargarPI();
+      //   CargarPI();
 
-       /*  LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
+       LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
          mMap.addMarker(new MarkerOptions().position(MiCasa).title("Esta es mi casa"));
          mMap.moveCamera(CameraUpdateFactory.newLatLng(MiCasa));
-         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));*/
+         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));
 
          CameraUpdate zoom= CameraUpdateFactory.zoomTo(15);
          mMap.animateCamera(zoom);
@@ -211,7 +202,7 @@
 
 
 //------------------------------------------CARGAR_PI____________________________________________________
-
+/*
      public void CargarPI ()
      {
          //conexion a http
@@ -245,6 +236,7 @@
                          Punto.add(descrip);
                          Punto.add(valor);
                         */
+/*
                      } catch (Exception e) {
                      Log.e("error", e.toString());
                      }
@@ -258,6 +250,7 @@
          });
 
      }
+     */
 //________________________________________________________________________________________________________
 
      public boolean checkLocationPermission(){

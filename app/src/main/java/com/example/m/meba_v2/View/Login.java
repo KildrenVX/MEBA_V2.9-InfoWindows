@@ -1,8 +1,8 @@
 package com.example.m.meba_v2.View;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,20 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.m.meba_v2.R;
-import com.example.m.meba_v2.View.MainActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.InterfaceAddress;
-import java.net.URL;
 
 public class Login extends AppCompatActivity {
 
@@ -73,8 +64,8 @@ public class Login extends AppCompatActivity {
 
         txtUso = (EditText)findViewById(R.id.txtusu);
         txtPas = (EditText)findViewById(R.id.txtpass);
-        btnIngresar = (Button)findViewById(R.id.btningresas);
-        btnRegistro = (Button)findViewById(R.id.btnregistrar);
+        btnIngresar = (Button)findViewById(R.id.btnIngresar);
+        btnRegistro = (Button)findViewById(R.id.btnRegistroUsu);
 
         //btnIngresar.setOnClickListener(this);
 
@@ -89,7 +80,6 @@ public class Login extends AppCompatActivity {
 
                     Intent i = new Intent(Login.this,Registro_User.class);
                     startActivity(i);
-
 
             }
         });
@@ -107,11 +97,12 @@ public class Login extends AppCompatActivity {
     //listo ya no sigo mas xD ahora sus lolasos x
     }
 
-    public void Clickr(View view)
+    /*public void Clickr(View view)
     {
         Intent in = new Intent(this,Registro_User.class);
         startActivity(in);
     }
+    */
 
 
 

@@ -1,5 +1,6 @@
 package com.example.m.meba_v2.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,15 +17,60 @@ import org.apache.http.Header;
 
 public class Registro_User extends AppCompatActivity  {
 
-    Button btnRegistrar;// crear botones y campos de texto
+    Button btnRegistrar,btnCancelar;// crear botones y campos de texto
     EditText txtNombre,txtSexo,txtCorreo,txtPass,txtConfirmPass,txtEdad;
 
-    public void json(String Correo, String Pass,String Edad, String Nombre , String Sexo){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registro__user);
+
+
+        txtNombre = (EditText)findViewById(R.id.nameregist);
+        txtCorreo = (EditText)findViewById(R.id.mailregis);
+        txtPass = (EditText)findViewById(R.id.pass);
+        txtConfirmPass = (EditText)findViewById(R.id.passr2);
+        txtEdad = (EditText)findViewById(R.id.edadr);
+
+        btnRegistrar = (Button)findViewById(R.id.btnRegistrar);
+        btnCancelar = (Button)findViewById(R.id.btnCancelar);
+
+
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                try {
+                    /*JsonRegistro(txtCorreo.getText().toString(), txtPass.getText().toString(),
+                            txtEdad.getText().toString(), txtNombre.getText().toString(),
+                            txtSexo.getText().toString());
+                            */
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Log.i("catch", e.toString());
+                }
+            }
+        });
+        btnCancelar.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent I = new Intent(getApplicationContext(),Login.class);
+                startActivity(I);
+            }
+        });
+
+
+    }
+
+
+
+    public void JsonRegistro (String Correo, String Pass,String Edad, String Nombre , String Sexo)
+    {
         //conexion a http
         AsyncHttpClient client = new AsyncHttpClient();
         String url="http://meba.esy.es/meba_connect/Crear_Usuario.php?Nombre="+Nombre+"&Pass="+Pass+
                 "&Edad="+Edad+"&Correo="+Correo+"&Sexo="+Sexo; // envia parametros po la URL
-        Log.e("probando y que saen", url.toString());
+        Log.i("probando ", url.toString());
 
        RequestParams parametros = new RequestParams();
         parametros.put("Nombre",Nombre);
@@ -33,24 +79,25 @@ public class Registro_User extends AppCompatActivity  {
         parametros.put("Correo",Correo);
         parametros.put("Sexo",Sexo);
 
-        client.post(url, parametros, new AsyncHttpResponseHandler() {
+        client.get(url, null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 200) {
-                    String resul = new String(responseBody);
-                    Log.e("Conexion exitosa", "");
-                    //si le envie los parametros por la url entonces se creo el usuario ???
                     try {
-                        Log.e("estoy", "aqui2");
-                        //JSONArray jsonArray = new JSONArray(resul);
-                        //int ID = Integer.parseInt(jsonArray.getJSONObject(0).getString("usuID"));
-                        //envio(ID);
+                    String resul = new String(responseBody);
+                    Log.i("Conexion exitosa", resul.toString());
+                    //si le envie los parametros por la url entonces se creo el usuario ???
+
+
 
                     } catch (Exception e) {
-                        Log.e("Error",e.toString());
-                       // Toast.makeText(Login.this, "Usuario no existe.", Toast.LENGTH_SHORT).show();
-                       // txtUso.setText("");
-                        //txtPas.setText("");
+                        Log.i("Error",e.toString());
+                        txtNombre.setText("");
+                        txtEdad.setText("");
+                        txtPass.setText("");
+                        txtConfirmPass.setText("");
+                        txtCorreo.setText("");
+                        txtSexo.setText("");
                     }
                 }
             }
@@ -62,27 +109,5 @@ public class Registro_User extends AppCompatActivity  {
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
 
-        txtNombre = (EditText)findViewById(R.id.nameregist);
-        btnRegistrar = (Button)findViewById(R.id.btnregistrar);
-        txtCorreo = (EditText)findViewById(R.id.mailregis);
-        txtPass = (EditText)findViewById(R.id.pass);
-        txtConfirmPass = (EditText)findViewById(R.id.passr2);
-        txtEdad = (EditText)findViewById(R.id.edadr);
-
-
-        btnRegistrar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                json(txtCorreo.getText().toString(),txtPass.getText().toString(),
-                        txtEdad.getText().toString(),txtNombre.getText().toString(),
-                        txtSexo.getText().toString());
-            }
-        });
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro__user);
-
-
-    }
 }

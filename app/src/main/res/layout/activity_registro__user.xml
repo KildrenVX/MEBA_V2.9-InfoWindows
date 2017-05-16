@@ -81,14 +81,14 @@
                 android:inputType="text" />
 
             <Button
-                android:id="@+id/btnregistrar"
+                android:id="@+id/btnRegistrar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Registrarce" />
+                android:text="Registrarse" />
 
             <Button
-                android:id="@+id/btncancelarR"
+                android:id="@+id/btnCancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"

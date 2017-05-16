@@ -14,7 +14,9 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/textView"
@@ -46,19 +48,18 @@
             tools:ignore="LabelFor" />
 
         <Button
-            android:id="@+id/btningresas"
+            android:id="@+id/btnIngresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Ingresar" />
 
         <Button
-            android:id="@+id/registro"
+            android:id="@+id/btnRegistroUsu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="registrarce"
-            android:onClick="Clickr"
 
             />
     </LinearLayout>
