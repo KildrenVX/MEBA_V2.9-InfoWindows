@@ -109,8 +109,8 @@ public class Login extends AppCompatActivity {
 
     public void Clickr(View view)
     {
-        Intent i = new Intent(this,Registro_User.class);
-        startActivity(i);
+        Intent in = new Intent(this,Registro_User.class);
+        startActivity(in);
     }
 
 

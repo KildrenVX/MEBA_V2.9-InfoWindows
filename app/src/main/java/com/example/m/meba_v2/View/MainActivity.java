@@ -32,6 +32,11 @@
  import com.google.android.gms.maps.model.LatLng;
  import com.google.android.gms.maps.model.Marker;
  import com.google.android.gms.maps.model.MarkerOptions;
+ import com.loopj.android.http.AsyncHttpClient;
+ import com.loopj.android.http.AsyncHttpResponseHandler;
+
+ import org.apache.http.Header;
+ import org.json.JSONArray;
 
  public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
          GoogleApiClient.ConnectionCallbacks,
@@ -197,6 +202,48 @@
      }
 //-------------------------------------------------------------------------------------------------------
 
+
+
+
+//------------------------------------------CARGAR_PI____________________________________________________
+
+     public void CArgarPI ()
+     {
+         for( int d = 0;d<=0;d++)
+         {
+             //conexion a http
+             AsyncHttpClient client = new AsyncHttpClient();
+             String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+d;
+             client.post(url, null, new AsyncHttpResponseHandler() {
+                 @Override
+                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                     if (statusCode == 200) {
+                         String resul = new String(responseBody);
+                         Log.e("estoy", "aqui");
+                         try {
+                             Log.e("estoy", "aqui2");
+                             JSONArray jsonArray = new JSONArray(resul);
+                             int ID = Integer.parseInt(jsonArray.getJSONObject(0).getString("PunId"));
+                             int lar =Intent.parseIntent(jsonArray.getJSONArray(1).getString("PunLatitud"));
+                             //  envio(ID);
+
+                         } catch (Exception e) {
+                         /*Toast.makeText(Login.this, "Usuario no existe.", Toast.LENGTH_SHORT).show();
+                         txtUso.setText("");
+                         txtPas.setText("");*/
+                         }
+                     }
+                 }
+
+                 @Override
+                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                 }
+             });
+         }
+
+     }
+//________________________________________________________________________________________________________
 
      public boolean checkLocationPermission(){
          if (ContextCompat.checkSelfPermission(this,
