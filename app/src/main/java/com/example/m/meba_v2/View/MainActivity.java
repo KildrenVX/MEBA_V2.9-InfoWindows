@@ -1,6 +1,6 @@
- package com.example.m.meba_v2.View;
+package com.example.m.meba_v2.View;
 
- import android.Manifest;
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,14 +32,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
- public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
-         GoogleApiClient.ConnectionCallbacks,
-         GoogleApiClient.OnConnectionFailedListener,
-         LocationListener, GoogleMap.InfoWindowAdapter, GoogleMap.OnInfoWindowClickListener {
-       //  AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+import org.apache.http.Header;
+import org.json.JSONArray;
 
-     private GoogleMap mMap;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener, GoogleMap.InfoWindowAdapter, GoogleMap.OnInfoWindowClickListener {
+    //  AlertDialog.Builder alerta = new AlertDialog.Builder(this);
+
+    private GoogleMap mMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,28 +101,81 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
     }
 
-     @Override
-     public void onMapReady(final GoogleMap googleMap) {
-         mMap=googleMap;
-         mMap.setMapType(googleMap.MAP_TYPE_NORMAL);
-         mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
+    @Override
+    public void onMapReady(final GoogleMap googleMap) {
+        mMap=googleMap;
+        mMap.setMapType(googleMap.MAP_TYPE_HYBRID);
+        mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
+// ____________________________CARGAR_PI________________________________________________________________________________________
 
-      //   CargarPI();
+        //conexion a http
+        AsyncHttpClient client = new AsyncHttpClient();
+        String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+1;
+
+        client.post(url, null, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                   String resul = new String(responseBody);
+                    Log.e("estoy", "aqui");
+                    Log.e("json", resul);
+                    try {
+
+                        JSONArray jsonArray = new JSONArray(resul);
+                        String ID = jsonArray.getJSONObject(0).getString("PunId");
+                        double lat = jsonArray.getJSONObject(0).getDouble("PunLatitud");
+                        double log = jsonArray.getJSONObject(0).getDouble("PunLongitud");
+                        String Titulo = jsonArray.getJSONObject(0).getString("PunTitulo");
+                        String descrip = jsonArray.getJSONObject(0).getString("PunDescripcion");
+                        String valor = jsonArray.getJSONObject(0).getString("PunValorizacion");
+                        //agregar marcadores
+                        String Slat,title,Slog;
+                        Slat = String.valueOf(lat);
+                        Slog = String.valueOf(log);
+
+                        Log.e("VAlor de de Tiulo: ",Titulo);
+                        Log.e("VAlor de de lat: ",Slog);
+                        Log.e("VAlor de de log: ",Slat);
+                        //Toast.makeText(getApplicationContext(),lat.to, Toast.LENGTH_LONG).show();
+                        LatLng marquer = new LatLng(lat,log);
+                        mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo));
+                        /*
+                         ArrayList<String> Punto = new ArrayList<String>();
+                         Punto.add(ID);
+                         Punto.add(lat);
+                         Punto.add(log);
+                         Punto.add(Titulo);
+                         Punto.add(descrip);
+                         Punto.add(valor);*/
+
+                    } catch (Exception e) {
+                        Log.e("error", e.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+
+//__________________________________________________________________________________________________________________________________________
 
        LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
          mMap.addMarker(new MarkerOptions().position(MiCasa).title("Esta es mi casa"));
          mMap.moveCamera(CameraUpdateFactory.newLatLng(MiCasa));
          mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));
 
-         CameraUpdate zoom= CameraUpdateFactory.zoomTo(15);
-         mMap.animateCamera(zoom);
-         //---------permiso de localizacion--------------------------------------------------
-         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                 != PackageManager.PERMISSION_GRANTED) {
-             return;
-         }
-          //-----------------------------------------------------------------------------------
+        CameraUpdate zoom= CameraUpdateFactory.zoomTo(15);
+        mMap.animateCamera(zoom);
+        //---------permiso de localizacion--------------------------------------------------
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        //-----------------------------------------------------------------------------------
 
         /* mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
              @Override
@@ -125,83 +187,99 @@ import com.google.android.gms.maps.model.MarkerOptions;
          */
 
         //----Agregar Marcador----------------------------------------------------------------------------------
-         Toast.makeText(this, "Manten presionado en un lugar del mapa para agregar marcador", Toast.LENGTH_LONG).show();
-         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener(){
+        Toast.makeText(this, "Manten presionado en un lugar del mapa para agregar marcador", Toast.LENGTH_LONG).show();
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener(){
             AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);//dialogo de alerta
-             @Override
-             public void onMapLongClick(final LatLng latLng) {
-                 //muestra coordenadas de posicion tocada dentro del mapa
-                 //Toast.makeText(getApplicationContext(), latLng.toString(), Toast.LENGTH_LONG).show();
-                 alerta.setTitle("Nuevo marcador");
-                 alerta.setMessage("Crear nuevo marcador aqui? ");
-                 alerta.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                     public void onClick(DialogInterface dialog, int which) {
-                         MarkerOptions markerOptions = new MarkerOptions();
-                         markerOptions.title("marcador con dialogo de alerta");
-                         markerOptions.position(latLng);
-                         mMap.addMarker(markerOptions);
-                         Log.e("coordenadas: ",latLng.toString());
-                     }
-                 })
-                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                             public void onClick(DialogInterface dialog, int which) {
-                                 dialog.cancel();
-                             }
-                         })
-                         .setIcon(android.R.drawable.ic_dialog_info)
-                         .show();
+            @Override
+            public void onMapLongClick(final LatLng latLng) {
+                //muestra coordenadas de posicion tocada dentro del mapa
+                //Toast.makeText(getApplicationContext(), latLng.toString(), Toast.LENGTH_LONG).show();
+                alerta.setTitle("Nuevo marcador");
+                alerta.setMessage("Crear nuevo marcador aqui? ");
+                alerta.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.title("marcador con dialogo de alerta");
+                        markerOptions.position(latLng);
+                        mMap.addMarker(markerOptions);
+                        Log.e("coordenadas: ",latLng.toString());
+                    }
+                })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .show();
 
 
-             }
-         });
+            }
+        });
         //------------------------------------------------------------------------------------------------------
 
-         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);// manipulacion de localizacion
-         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, this);
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);// manipulacion de localizacion
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, this);
 
-         mMap.setInfoWindowAdapter(this);//adaptar las ventanas de informacion
-         mMap.setOnInfoWindowClickListener(this);//infowindows click
-     }
+        mMap.setInfoWindowAdapter(this);//adaptar las ventanas de informacion
+        mMap.setOnInfoWindowClickListener(this);//infowindows click
+    }
 
 
- //---------------------TIEMPO:DE_ESPERA_DE_ACTIVAR_EL_GPS-----------------------------------------------
-     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    //---------------------TIEMPO:DE_ESPERA_DE_ACTIVAR_EL_GPS-----------------------------------------------
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
-     @Override
-     public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
-          try {
-              switch (requestCode) {
-                  case MY_PERMISSIONS_REQUEST_LOCATION: {
-                      // Si la consulta es cancelada los arreglos estaran vacios
-                      if (grantResults.length > 0
-                              && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        try {
+            switch (requestCode) {
+                case MY_PERMISSIONS_REQUEST_LOCATION: {
+                    // Si la consulta es cancelada los arreglos estaran vacios
+                    if (grantResults.length > 0
+                            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                          // permiso concedido
-                          if (ContextCompat.checkSelfPermission(this,
-                                  Manifest.permission.ACCESS_FINE_LOCATION)
-                                  == PackageManager.PERMISSION_GRANTED) {
-                              mMap.setMyLocationEnabled(true);
-                          }
-                      } else {
-                          // Permiso denegado
-                          Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
-                      }
-                      return;
-                  }
-                  // agregar mas case para mas permisos(wifi,contactos,etc)
+                        // permiso concedido
+                        if (ContextCompat.checkSelfPermission(this,
+                                Manifest.permission.ACCESS_FINE_LOCATION)
+                                == PackageManager.PERMISSION_GRANTED) {
+                            mMap.setMyLocationEnabled(true);
+                        }
+                    } else {
+                        // Permiso denegado
+                        Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
+                    }
+                    return;
+                }
+                // agregar mas case para mas permisos(wifi,contactos,etc)
 
-              }
-          }catch (Exception e){
-              e.printStackTrace();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
 
-          }
-     }
+        }
+    }
 //-------------------------------------------------------------------------------------------------------
 
 
 
 
 //------------------------------------------CARGAR_PI____________________________________________________
+
+    /*public void CargarPI (final GoogleMap googleMap)
+    {
+        //conexion a http
+        AsyncHttpClient client = new AsyncHttpClient();
+        String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+1;
+
+        client.post(url, null, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    mMap = googleMap;
+                    String resul = new String(responseBody);
+                    Log.e("estoy", "aqui");
+                    Log.e("json", resul);
+                    try {
 /*
      public void CargarPI ()
      {
@@ -217,16 +295,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
                      Log.e("json", resul);
                      try {
 
-                         JSONArray jsonArray = new JSONArray(resul);
-                         String ID = jsonArray.getJSONObject(0).getString("PunId");
-                         double lat = jsonArray.getJSONObject(0).getDouble("PunLatitud");
-                         double log = jsonArray.getJSONObject(0).getDouble("PunLongitud");
-                         String Titulo = jsonArray.getJSONObject(0).getString("PunTitulo");
-                         String descrip = jsonArray.getJSONObject(0).getString("PunDescripcion");
-                         String valor = jsonArray.getJSONObject(0).getString("PunValorizacion");
+                        JSONArray jsonArray = new JSONArray(resul);
+                        String ID = jsonArray.getJSONObject(0).getString("PunId");
+                        double lat = jsonArray.getJSONObject(0).getDouble("PunLatitud");
+                        double log = jsonArray.getJSONObject(0).getDouble("PunLongitud");
+                        String Titulo = jsonArray.getJSONObject(0).getString("PunTitulo");
+                        String descrip = jsonArray.getJSONObject(0).getString("PunDescripcion");
+                        String valor = jsonArray.getJSONObject(0).getString("PunValorizacion");
                         //agregar marcadores
-                         LatLng marquer = new LatLng(lat,log);
-                         mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo));
+
+                        LatLng marquer = new LatLng(lat,log);
+                        mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo));
                         /*
                          ArrayList<String> Punto = new ArrayList<String>();
                          Punto.add(ID);
@@ -235,6 +314,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
                          Punto.add(Titulo);
                          Punto.add(descrip);
                          Punto.add(valor);
+
+                    } catch (Exception e) {
+                        Log.e("error", e.toString());
+                    }
+                }
+            }
                         */
 /*
                      } catch (Exception e) {
@@ -243,64 +328,66 @@ import com.google.android.gms.maps.model.MarkerOptions;
                  }
              }
 
-             @Override
-             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
-             }
-         });
+            }
+        });
 
+    }
+    */
      }
      */
 //________________________________________________________________________________________________________
 
-     public boolean checkLocationPermission(){
-         if (ContextCompat.checkSelfPermission(this,
-                 Manifest.permission.ACCESS_FINE_LOCATION)
-                 != PackageManager.PERMISSION_GRANTED) {
-             //preguntar si el usuario necesita explicacion
-             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-                 // Mostrar explicacion del permiso
-                 ActivityCompat.requestPermissions(this,
-                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                         MY_PERMISSIONS_REQUEST_LOCATION);
-             } else {
-                 // pedir el permiso
-                 ActivityCompat.requestPermissions(this,
-                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                         MY_PERMISSIONS_REQUEST_LOCATION);
-             }
-             return false;
-         } else {
-             return true;
-         }
-     }
-     @Override
-     public void onConnected(@Nullable Bundle bundle) {
+    public boolean checkLocationPermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //preguntar si el usuario necesita explicacion
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Mostrar explicacion del permiso
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            } else {
+                // pedir el permiso
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
 
-     }
+    }
 
-     @Override
-     public void onConnectionSuspended(int i) {
+    @Override
+    public void onConnectionSuspended(int i) {
 
-     }
+    }
 
 
-     @Override
-     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-     }
+    }
 
-//---------------------CENTRA_A_LA_LOCALIZACION_ACTUAL----------------------------------------------
-     @Override
-     public void onLocationChanged(Location location) {
-         mMap.clear();
+    //---------------------CENTRA_A_LA_LOCALIZACION_ACTUAL----------------------------------------------
+    @Override
+    public void onLocationChanged(Location location) {
+        mMap.clear();
 
-         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-         //abrir en la posicion del marcador con zoom
-         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
+        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+        //abrir en la posicion del marcador con zoom
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
 
-     }
+    }
 //-------------------------------------------------------------------------------------------------
 
      /*public void BotonMarcador(Location location){
@@ -317,52 +404,52 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
      }*/
 
-     @Override
-     public void onStatusChanged(String provider, int status, Bundle extras) {
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
 
-     }
+    }
 
-     @Override
-     public void onProviderEnabled(String provider) {
+    @Override
+    public void onProviderEnabled(String provider) {
 
-     }
+    }
 
-     @Override
-     public void onProviderDisabled(String provider) {
+    @Override
+    public void onProviderDisabled(String provider) {
 
-     }
+    }
 
-//-------------------CARGA_UN_INFO_WINDOWS----------------------------------------------------
-     @Override
-     public View getInfoWindow(Marker marker) {
-         LayoutInflater inflater = LayoutInflater.from(this);
-         View view = inflater.inflate(R.layout.info_windows,null,false);
-         view.findViewById(R.id.txtTitulo);
-         view.findViewById(R.id.txtDescripcion);
-         view.findViewById(R.id.txtDireccion);
-         view.findViewById(R.id.imagen);
-         return  view;
-     }
+    //-------------------CARGA_UN_INFO_WINDOWS----------------------------------------------------
+    @Override
+    public View getInfoWindow(Marker marker) {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.info_windows,null,false);
+        view.findViewById(R.id.txtTitulo);
+        view.findViewById(R.id.txtDescripcion);
+        view.findViewById(R.id.txtDireccion);
+        view.findViewById(R.id.imagen);
+        return  view;
+    }
 //--------------------------------------------------------------------------------------------
 
-//----------------------CONTENIDO_DEL_INFO_WINDOWS--------------------------------------------
-     @Override
-     public View getInfoContents(Marker marker) {
-         return null;
-     }
+    //----------------------CONTENIDO_DEL_INFO_WINDOWS--------------------------------------------
+    @Override
+    public View getInfoContents(Marker marker) {
+        return null;
+    }
 //---------------------------------------------------------------------------------------------
 
-//--------------------ACCION_AL_TOCAR:EL_INFO_WINDOWS-------------------------------------------
-     @Override
-     public void onInfoWindowClick(Marker marker) {
-         //accion al tocar el info windows
-         Toast.makeText(this, "mostrar detalle del punto de interes ", Toast.LENGTH_LONG).show();
-try {
-}catch (Exception e){
-    e.printStackTrace();
+    //--------------------ACCION_AL_TOCAR:EL_INFO_WINDOWS-------------------------------------------
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        //accion al tocar el info windows
+        Toast.makeText(this, "mostrar detalle del punto de interes ", Toast.LENGTH_LONG).show();
+        try {
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
 }
-
-
-     }
- }
 
