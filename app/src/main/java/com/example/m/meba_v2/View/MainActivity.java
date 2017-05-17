@@ -224,7 +224,7 @@
                              Log.e("estoy", "aqui2");
                              JSONArray jsonArray = new JSONArray(resul);
                              int ID = Integer.parseInt(jsonArray.getJSONObject(0).getString("PunId"));
-                             int lar =Intent.parseIntent(jsonArray.getJSONArray(1).getString("PunLatitud"));
+                             //int lar =Intent.parseIntent(jsonArray.getJSONArray(1).getString("PunLatitud"));
                              //  envio(ID);
 
                          } catch (Exception e) {
