@@ -212,7 +212,7 @@
 
 //------------------------------------------CARGAR_PI____________________________________________________
 
-     public ArrayList<String> CargarPI ()
+     public void CargarPI ()
      {
          //conexion a http
          AsyncHttpClient client = new AsyncHttpClient();
@@ -228,12 +228,15 @@
 
                          JSONArray jsonArray = new JSONArray(resul);
                          String ID = jsonArray.getJSONObject(0).getString("PunId");
-                         String lat = jsonArray.getJSONObject(0).getString("PunLatitud");
-                         String log = jsonArray.getJSONObject(0).getString("PunLongitud");
+                         double lat = jsonArray.getJSONObject(0).getDouble("PunLatitud");
+                         double log = jsonArray.getJSONObject(0).getDouble("PunLongitud");
                          String Titulo = jsonArray.getJSONObject(0).getString("PunTitulo");
                          String descrip = jsonArray.getJSONObject(0).getString("PunDescripcion");
                          String valor = jsonArray.getJSONObject(0).getString("PunValorizacion");
-
+                        //agregar marcadores
+                         LatLng marquer = new LatLng(lat,log);
+                         mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo));
+                        /*
                          ArrayList<String> Punto = new ArrayList<String>();
                          Punto.add(ID);
                          Punto.add(lat);
@@ -241,7 +244,7 @@
                          Punto.add(Titulo);
                          Punto.add(descrip);
                          Punto.add(valor);
-                         
+                        */
                      } catch (Exception e) {
                      Log.e("error", e.toString());
                      }
