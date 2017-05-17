@@ -38,10 +38,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.apache.http.Header;
 import org.json.JSONArray;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -335,7 +331,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
-    */
+
      }
      */
 //________________________________________________________________________________________________________

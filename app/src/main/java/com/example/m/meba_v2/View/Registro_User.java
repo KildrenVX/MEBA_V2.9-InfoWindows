@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.m.meba_v2.R;
 import com.loopj.android.http.AsyncHttpClient;
@@ -32,6 +33,8 @@ public class Registro_User extends AppCompatActivity  {
         txtConfirmPass = (EditText)findViewById(R.id.passr2);
         txtEdad = (EditText)findViewById(R.id.edadr);
 
+        Log.i(" ",txtNombre.toString());
+
         btnRegistrar = (Button)findViewById(R.id.btnRegistrar);
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
 
@@ -40,13 +43,25 @@ public class Registro_User extends AppCompatActivity  {
 
             public void onClick(View v) {
                 try {
-                    /*JsonRegistro(txtCorreo.getText().toString(), txtPass.getText().toString(),
-                            txtEdad.getText().toString(), txtNombre.getText().toString(),
-                            txtSexo.getText().toString());
-                            */
+                    if (txtNombre.getText().toString().isEmpty()
+                            &&txtCorreo.getText().toString().isEmpty()
+                            &&txtSexo.getText().toString().isEmpty()
+                            &&txtPass.getText().toString().isEmpty()
+                            &&txtConfirmPass.getText().toString().isEmpty()
+                            &&txtEdad.getText().toString().isEmpty()){
+                        Toast.makeText(null, "campos vacios", Toast.LENGTH_SHORT).show();
+                        Log.e("campos vacios","");
+
+                    }else {
+                        JsonRegistro(txtCorreo.getText().toString(), txtPass.getText().toString(),
+                                txtEdad.getText().toString(), txtNombre.getText().toString(),
+                                txtSexo.getText().toString());
+                        Toast.makeText(null, "campos completos, json", Toast.LENGTH_SHORT).show();
+                        Log.e("campos completos, json2","");
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
-                    Log.i("catch", e.toString());
+                    Log.e("catch", e.toString());
                 }
             }
         });
@@ -58,8 +73,6 @@ public class Registro_User extends AppCompatActivity  {
                 startActivity(I);
             }
         });
-
-
     }
 
 
