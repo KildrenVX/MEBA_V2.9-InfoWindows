@@ -22,7 +22,7 @@ public class Registro_User extends AppCompatActivity  {
     public void json(String Correo, String Pass,String Edad, String Nombre , String Sexo){
         //conexion a http
         AsyncHttpClient client = new AsyncHttpClient();
-        String url="http://meba.esy.es/meba_connect/create_User.php?Nombre="+Nombre+"&Pass="+Pass+
+        String url="http://meba.esy.es/meba_connect/Crear_Usuario.php?Nombre="+Nombre+"&Pass="+Pass+
                 "&Edad="+Edad+"&Correo="+Correo+"&Sexo="+Sexo; // envia parametros po la URL
         Log.e("probando y que saen", url.toString());
 

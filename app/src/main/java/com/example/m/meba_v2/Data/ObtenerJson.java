@@ -20,7 +20,7 @@ public class ObtenerJson {
     public void ObjDatos(){
         //conexion a http
         AsyncHttpClient client = new AsyncHttpClient();
-        String url="http://meba.esy.es/meba_connect/ver_punto_interes.php";
+        String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID=1";
 
         //envio de parametros
         //RequestParams parametros = new RequestParams();
@@ -42,6 +42,8 @@ public class ObtenerJson {
         });
 
     }
+
+
 
     public  void cargarLista(ArrayList<String> datos){
 
