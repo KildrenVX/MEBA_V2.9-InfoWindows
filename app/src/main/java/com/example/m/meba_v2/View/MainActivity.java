@@ -18,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.m.meba_v2.R;
@@ -38,6 +39,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -88,15 +90,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,LugaresFavoritos.class);
                 startActivity(intent);
-            }
-        });
-
-        final FloatingActionButton p3 = (FloatingActionButton) findViewById(R.id.LugarNuevo);
-        p3.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-
             }
         });
 
@@ -302,11 +295,15 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     //-------------------CARGA_UN_INFO_WINDOWS----------------------------------------------------
     @Override
     public View getInfoWindow(Marker marker) {
+
+
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.info_windows,null,false);
-        view.findViewById(R.id.txtTitulo);
-        view.findViewById(R.id.txtDescripcion);
+        TextView titulo,descripcion;
+        titulo=(TextView) view.findViewById(R.id.txtTitulo);
+        descripcion = (TextView) view.findViewById(R.id.txtDescripcion);
         view.findViewById(R.id.txtDireccion);
+
         return  view;
     }
 //--------------------------------------------------------------------------------------------

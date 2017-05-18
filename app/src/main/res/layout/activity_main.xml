@@ -60,16 +60,6 @@
             app:fab_size="mini"
             />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/LugarNuevo"
-            app:fab_icon="@drawable/ic_add_location_black_24dp"
-            app:fab_colorNormal="@color/colorAccent"
-            app:fab_title="Agregar Lugar"
-            app:fab_size="mini"
-            />
-
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
