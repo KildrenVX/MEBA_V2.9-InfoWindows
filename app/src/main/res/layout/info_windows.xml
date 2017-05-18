@@ -8,19 +8,10 @@
     android:weightSum="100"
     android:minWidth="700px">
 
-    <ImageView
-        android:id="@+id/imagen"
-        android:layout_width="match_parent"
-        android:layout_height="99dp"
-        android:layout_weight="50"
-        android:background="@color/colorPrimary"
-        app:srcCompat="@drawable/social" />
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="104dp"
         android:layout_marginTop="10dp"
-        android:layout_weight="50"
         android:orientation="vertical">
 
         <TextView

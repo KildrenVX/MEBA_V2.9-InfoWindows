@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.m.meba_v2.R;
+import com.example.m.meba_v2.model.Marcadores;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,6 +38,10 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -102,66 +107,20 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap=googleMap;
         mMap.setMapType(googleMap.MAP_TYPE_HYBRID);
         mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
-// ____________________________CARGAR_PI________________________________________________________________________________________
+        // ____________________________CARGAR_PI________________________________________________________________________________________
 
-        //conexion a http
-        AsyncHttpClient client = new AsyncHttpClient();
-        String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+1;
-
-        client.post(url, null, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                   String resul = new String(responseBody);
-                    Log.e("estoy", "aqui");
-                    Log.e("json", resul);
-                    try {
-
-                        JSONArray jsonArray = new JSONArray(resul);
-                        String ID = jsonArray.getJSONObject(0).getString("PunId");
-                        double lat = jsonArray.getJSONObject(0).getDouble("PunLatitud");
-                        double log = jsonArray.getJSONObject(0).getDouble("PunLongitud");
-                        String Titulo = jsonArray.getJSONObject(0).getString("PunTitulo");
-                        String descrip = jsonArray.getJSONObject(0).getString("PunDescripcion");
-                        String valor = jsonArray.getJSONObject(0).getString("PunValorizacion");
-                        //agregar marcadores
-                        String Slat,title,Slog;
-                        Slat = String.valueOf(lat);
-                        Slog = String.valueOf(log);
-
-                        Log.e("VAlor de de Tiulo: ",Titulo);
-                        Log.e("VAlor de de lat: ",Slog);
-                        Log.e("VAlor de de log: ",Slat);
-                        //Toast.makeText(getApplicationContext(),lat.to, Toast.LENGTH_LONG).show();
-                        LatLng marquer = new LatLng(lat,log);
-                        mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo));
-                        /*
-                         ArrayList<String> Punto = new ArrayList<String>();
-                         Punto.add(ID);
-                         Punto.add(lat);
-                         Punto.add(log);
-                         Punto.add(Titulo);
-                         Punto.add(descrip);
-                         Punto.add(valor);*/
-
-                    } catch (Exception e) {
-                        Log.e("error", e.toString());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        });
-
+        for (int i =1;i<=10;i++)
+        {
+            Marcadores m = new Marcadores();
+            m.CargarPI(i,mMap);
+        }
 //__________________________________________________________________________________________________________________________________________
 
-       LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
+
+       /*  LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
          mMap.addMarker(new MarkerOptions().position(MiCasa).title("Esta es mi casa"));
          mMap.moveCamera(CameraUpdateFactory.newLatLng(MiCasa));
-         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));
+         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));*/
 
         CameraUpdate zoom= CameraUpdateFactory.zoomTo(15);
         mMap.animateCamera(zoom);
@@ -259,82 +218,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-//------------------------------------------CARGAR_PI____________________________________________________
 
-    /*public void CargarPI (final GoogleMap googleMap)
-    {
-        //conexion a http
-        AsyncHttpClient client = new AsyncHttpClient();
-        String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+1;
-
-        client.post(url, null, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200) {
-                    mMap = googleMap;
-                    String resul = new String(responseBody);
-                    Log.e("estoy", "aqui");
-                    Log.e("json", resul);
-                    try {
-/*
-     public void CargarPI ()
-     {
-         //conexion a http
-         AsyncHttpClient client = new AsyncHttpClient();
-         String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+1;
-         client.post(url, null, new AsyncHttpResponseHandler() {
-             @Override
-             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                 if (statusCode == 200) {
-                     String resul = new String(responseBody);
-                     Log.e("estoy", "aqui");
-                     Log.e("json", resul);
-                     try {
-
-                        JSONArray jsonArray = new JSONArray(resul);
-                        String ID = jsonArray.getJSONObject(0).getString("PunId");
-                        double lat = jsonArray.getJSONObject(0).getDouble("PunLatitud");
-                        double log = jsonArray.getJSONObject(0).getDouble("PunLongitud");
-                        String Titulo = jsonArray.getJSONObject(0).getString("PunTitulo");
-                        String descrip = jsonArray.getJSONObject(0).getString("PunDescripcion");
-                        String valor = jsonArray.getJSONObject(0).getString("PunValorizacion");
-                        //agregar marcadores
-
-                        LatLng marquer = new LatLng(lat,log);
-                        mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo));
-                        /*
-                         ArrayList<String> Punto = new ArrayList<String>();
-                         Punto.add(ID);
-                         Punto.add(lat);
-                         Punto.add(log);
-                         Punto.add(Titulo);
-                         Punto.add(descrip);
-                         Punto.add(valor);
-
-                    } catch (Exception e) {
-                        Log.e("error", e.toString());
-                    }
-                }
-            }
-                        */
-/*
-                     } catch (Exception e) {
-                     Log.e("error", e.toString());
-                     }
-                 }
-             }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        });
-
-    }
-
-     }
-     */
-//________________________________________________________________________________________________________
 
     public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
@@ -423,7 +307,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         view.findViewById(R.id.txtTitulo);
         view.findViewById(R.id.txtDescripcion);
         view.findViewById(R.id.txtDireccion);
-        view.findViewById(R.id.imagen);
         return  view;
     }
 //--------------------------------------------------------------------------------------------
