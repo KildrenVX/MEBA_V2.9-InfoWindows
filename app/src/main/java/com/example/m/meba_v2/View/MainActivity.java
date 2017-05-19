@@ -48,7 +48,7 @@ import java.util.List;
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener, GoogleMap.InfoWindowAdapter, GoogleMap.OnInfoWindowClickListener {
+        LocationListener/* ,GoogleMap.InfoWindowAdapter, GoogleMap.OnInfoWindowClickListener*/ {
     //  AlertDialog.Builder alerta = new AlertDialog.Builder(this);
 
     private GoogleMap mMap;
@@ -67,9 +67,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onClick(View v) {
-                try
-                {Intent intent = new Intent(MainActivity.this, Login.class);
-                    startActivity(intent);}catch (Exception e){Log.i("ALGO PASO AQUI",e.toString());}
             }
         });
 
@@ -78,8 +75,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Ajustees.class);
-                startActivity(intent);
+               try{
+                   Intent intent = new Intent(MainActivity.this,Detalle_punto_de_interes.class);
+                   startActivity(intent);
+               }catch(Exception e)
+               {
+                   Log.e("ERROR del INTENT",e.toString());
+               }
             }
         });
 
@@ -169,8 +171,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);// manipulacion de localizacion
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, this);
 
-        mMap.setInfoWindowAdapter(this);//adaptar las ventanas de informacion
-        mMap.setOnInfoWindowClickListener(this);//infowindows click
+       // mMap.setInfoWindowAdapter(this);//adaptar las ventanas de informacion
+       // mMap.setOnInfoWindowClickListener(this);//infowindows click
     }
 
 
@@ -254,6 +256,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     //---------------------CENTRA_A_LA_LOCALIZACION_ACTUAL----------------------------------------------
     @Override
     public void onLocationChanged(Location location) {
+
+        //mMap.clear();
+        for (int i =1;i<=10;i++)
+        {
+            Marcadores m = new Marcadores();
+            m.CargarPI(i,mMap);
+        }
+
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         //abrir en la posicion del marcador con zoom
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
@@ -292,7 +302,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //-------------------CARGA_UN_INFO_WINDOWS----------------------------------------------------
-    @Override
+   /* @Override
     public View getInfoWindow(Marker marker) {
 
 
@@ -325,6 +335,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-    }
+    }*/
 }
 

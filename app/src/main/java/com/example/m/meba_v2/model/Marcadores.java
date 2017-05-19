@@ -51,7 +51,7 @@ public class Marcadores {
                         MarkerOptions markerOptions = new MarkerOptions();
                         markerOptions.title(Titulo);
                         markerOptions.position(marquer);
-                        mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo));
+                        mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo).snippet(descrip));
                         /*
                          ArrayList<String> Punto = new ArrayList<String>();
                          Punto.add(ID);
