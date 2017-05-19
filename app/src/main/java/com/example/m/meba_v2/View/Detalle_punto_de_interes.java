@@ -25,7 +25,7 @@ public class Detalle_punto_de_interes extends AppCompatActivity implements View.
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        btn=(Button)findViewById(R.id.veranec);
+        //btn=(Button)findViewById(R.id.veranec);
 
         btn.setOnClickListener(this);
     }

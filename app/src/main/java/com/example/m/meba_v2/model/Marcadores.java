@@ -30,8 +30,6 @@ public class Marcadores {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 200) {
                     String resul = new String(responseBody);
-                    Log.e("estoy", "aqui");
-                    Log.e("json", resul);
                     try {
 
                         JSONArray jsonArray = new JSONArray(resul);

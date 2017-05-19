@@ -254,11 +254,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     //---------------------CENTRA_A_LA_LOCALIZACION_ACTUAL----------------------------------------------
     @Override
     public void onLocationChanged(Location location) {
-        mMap.clear();
-
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         //abrir en la posicion del marcador con zoom
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
+
 
     }
 //-------------------------------------------------------------------------------------------------
