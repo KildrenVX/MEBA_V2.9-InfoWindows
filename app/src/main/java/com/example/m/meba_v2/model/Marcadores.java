@@ -3,6 +3,7 @@ package com.example.m.meba_v2.model;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.loopj.android.http.AsyncHttpClient;
@@ -51,7 +52,8 @@ public class Marcadores {
                         MarkerOptions markerOptions = new MarkerOptions();
                         markerOptions.title(Titulo);
                         markerOptions.position(marquer);
-                        mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo).snippet(descrip));
+                        mMap.addMarker(new MarkerOptions().position(marquer).title(Titulo)
+                        .snippet(descrip).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                         /*
                          ArrayList<String> Punto = new ArrayList<String>();
                          Punto.add(ID);
