@@ -34,7 +34,7 @@
                 android:value=".View.MainActivity" />
         </activity>
         <activity
-            android:name=".View.Ajustees"
+            android:name=".View.Ajustes"
             android:parentActivityName=".View.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

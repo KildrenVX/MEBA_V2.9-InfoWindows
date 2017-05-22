@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.example.m.meba_v2.R;
 
-public class Ajustees extends AppCompatActivity {
+public class Ajustes extends AppCompatActivity {
 
 
     @Override

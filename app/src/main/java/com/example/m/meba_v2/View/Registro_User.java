@@ -42,27 +42,16 @@ public class Registro_User extends AppCompatActivity  {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                try {
-                    if (txtNombre.getText().toString().isEmpty()
-                            &&txtCorreo.getText().toString().isEmpty()
-                            &&txtSexo.getText().toString().isEmpty()
-                            &&txtPass.getText().toString().isEmpty()
-                            &&txtConfirmPass.getText().toString().isEmpty()
-                            &&txtEdad.getText().toString().isEmpty()){
-                        Toast.makeText(null, "campos vacios", Toast.LENGTH_SHORT).show();
-                        Log.e("campos vacios","");
+                  try {
+                      JsonRegistro(txtCorreo.getText().toString(), txtPass.getText().toString(),
+                              txtEdad.getText().toString(), txtNombre.getText().toString(),
+                              txtSexo.getText().toString());
+                      Toast.makeText(null, "campos completos, json", Toast.LENGTH_SHORT).show();
+                      Log.e("campos completos, json2", "");
+                  }catch (Exception e ){
+                      Log.e("error insert",e.toString());
+                  }
 
-                    }else {
-                        JsonRegistro(txtCorreo.getText().toString(), txtPass.getText().toString(),
-                                txtEdad.getText().toString(), txtNombre.getText().toString(),
-                                txtSexo.getText().toString());
-                        Toast.makeText(null, "campos completos, json", Toast.LENGTH_SHORT).show();
-                        Log.e("campos completos, json2","");
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                    Log.e("catch", e.toString());
-                }
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener(){
@@ -81,8 +70,7 @@ public class Registro_User extends AppCompatActivity  {
     {
         //conexion a http
         AsyncHttpClient client = new AsyncHttpClient();
-        String url="http://meba.esy.es/meba_connect/Crear_Usuario.php?Nombre="+Nombre+"&Pass="+Pass+
-                "&Edad="+Edad+"&Correo="+Correo+"&Sexo="+Sexo; // envia parametros po la URL
+        String url="http://meba.esy.es/meba_connect/Crear_Usuario.php";
         Log.i("probando ", url.toString());
 
        RequestParams parametros = new RequestParams();
@@ -92,19 +80,20 @@ public class Registro_User extends AppCompatActivity  {
         parametros.put("Correo",Correo);
         parametros.put("Sexo",Sexo);
 
-        client.get(url, null, new AsyncHttpResponseHandler() {
+        client.post(url, parametros, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 200) {
                     try {
                     String resul = new String(responseBody);
-                    Log.i("Conexion exitosa", resul.toString());
-                    //si le envie los parametros por la url entonces se creo el usuario ???
+                    Log.e("Conexion exitosa", resul.toString());
+                        Intent I = new Intent(getApplicationContext(),Login.class);
+                        startActivity(I);
 
 
 
                     } catch (Exception e) {
-                        Log.i("Error",e.toString());
+                        Log.e("Error conexion fallida ",e.toString());
                         txtNombre.setText("");
                         txtEdad.setText("");
                         txtPass.setText("");

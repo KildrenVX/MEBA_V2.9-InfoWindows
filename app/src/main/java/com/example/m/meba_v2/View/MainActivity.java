@@ -16,9 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.m.meba_v2.R;
@@ -32,18 +30,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.apache.http.Header;
-import org.json.JSONArray;
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -67,6 +54,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onClick(View v) {
+                try{
+                    Intent intent = new Intent(MainActivity.this,Login.class);
+                    startActivity(intent);
+                }catch(Exception e)
+                {
+                    Log.e("ERROR del INTENT",e.toString());
+                }
             }
         });
 
@@ -76,7 +70,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                try{
-                   Intent intent = new Intent(MainActivity.this,Detalle_punto_de_interes.class);
+                   Intent intent = new Intent(MainActivity.this,Ajustes.class);
                    startActivity(intent);
                }catch(Exception e)
                {
