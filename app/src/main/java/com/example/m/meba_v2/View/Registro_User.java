@@ -1,6 +1,7 @@
 package com.example.m.meba_v2.View;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +16,16 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 public class Registro_User extends AppCompatActivity  {
 
@@ -39,13 +50,16 @@ public class Registro_User extends AppCompatActivity  {
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
 
 
+
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                   try {
-                      JsonRegistro(txtCorreo.getText().toString(), txtPass.getText().toString(),
+                      /*JsonRegistro(txtCorreo.getText().toString(), txtPass.getText().toString(),
                               txtEdad.getText().toString(), txtNombre.getText().toString(),
                               txtSexo.getText().toString());
+                              */
+                      guardar(v);
                       Toast.makeText(null, "campos completos, json", Toast.LENGTH_SHORT).show();
                       Log.e("campos completos, json2", "");
                   }catch (Exception e ){
@@ -64,7 +78,22 @@ public class Registro_User extends AppCompatActivity  {
         });
     }
 
+    public void guardar(View view){
 
+        String correo,pass,edad,nombre,sex;
+
+               correo= txtCorreo.getText().toString();
+                pass=txtPass.getText().toString();
+                edad=txtEdad.getText().toString();
+                nombre=txtNombre.getText().toString();
+                sex=txtSexo.getText().toString();
+        BackgroundTask tareaAsincronica = new BackgroundTask();
+        tareaAsincronica.execute(correo,pass,edad,nombre,sex);
+
+
+
+
+    }
 
     public void JsonRegistro (String Correo, String Pass,String Edad, String Nombre , String Sexo)
     {
@@ -85,8 +114,7 @@ public class Registro_User extends AppCompatActivity  {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 200) {
                     try {
-                    String resul = new String(responseBody);
-                    Log.e("Conexion exitosa", resul.toString());
+                    Log.e("Conexion exitosa","");
                         Intent I = new Intent(getApplicationContext(),Login.class);
                         startActivity(I);
 
@@ -111,5 +139,80 @@ public class Registro_User extends AppCompatActivity  {
         });
     }
 
+    class BackgroundTask extends AsyncTask<String, Void, String> {
 
-}
+        String link;
+
+        protected void onPreExecute(){
+            link = "http://meba.esy.es/meba_connect/Crear_Usuario.php";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+
+
+        protected String doInBackground(String... params) {
+            String Correo;
+            String Pass;
+            String Edad;
+            String Nombre;
+            String Sexo;
+
+            //link = "http://meba.esy.es/meba_connect/Crear_Usuario.php";
+
+            Correo = params[0];
+            Pass = params[1];
+            Edad = params[2];
+            Nombre = params[3];
+            Sexo = params[4];
+
+            try {
+                URL url = new URL(link);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream),8);
+                String data = URLEncoder.encode("Correo","UTF-8")+"="+URLEncoder.encode(Correo,"UTF-8")+"&"+
+                        URLEncoder.encode("Pass","UTF-8")+"="+URLEncoder.encode(Pass,"UTF-8")+"&"+
+                        URLEncoder.encode("Edad","UTF-8")+"="+URLEncoder.encode(Edad,"UTF-8")+"&"+
+                        URLEncoder.encode("Nombre","UTF-8")+"="+URLEncoder.encode(Nombre,"UTF-8")+"&"+
+                        URLEncoder.encode("Sexo","UTF-8")+"="+URLEncoder.encode(Sexo,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return "datos ingresados ";
+
+
+
+            }catch (MalformedURLException e ){
+                e.fillInStackTrace();
+
+            }catch(IOException e){
+                e.fillInStackTrace();
+
+            }
+
+            return null;
+
+
+
+
+
+        }
+    }
+    }

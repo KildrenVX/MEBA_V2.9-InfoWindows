@@ -81,10 +81,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.44"
                     android:background="@color/colorAccent"
-                    android:text="AgreagarPI"
+                    android:onClick="Click"
+                    android:text="AgregarPI"
                     android:textColor="@color/common_google_signin_btn_text_dark_default"
                     tools:ignore="ButtonStyle"
-                    android:onClick="Click"
 
                     />
             </LinearLayout>

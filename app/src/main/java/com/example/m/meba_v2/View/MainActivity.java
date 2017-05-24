@@ -44,7 +44,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //checkLocationPermission();
+        checkLocationPermission();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -142,11 +142,19 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 alerta.setMessage("Crear nuevo marcador aqui? ");
                 alerta.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        markerOptions.title("marcador con dialogo de alerta");
-                        markerOptions.position(latLng);
-                        mMap.addMarker(markerOptions);
+
+
+                        Intent i = new Intent(MainActivity.this,Agregar_PI.class);
                         Log.e("coordenadas: ",latLng.toString());
+                        String a = latLng.toString();
+                        String sCadena = a.substring(a.indexOf("(") + 1, a.indexOf(")"));
+                        String[] array = sCadena.split(",");
+                        Log.e("valor de Latitud",array[0]);
+                        Log.e("Valor Longitud  ",array[1]);
+                        i.putExtra("latitud",array[0]);
+                        i.putExtra("longitud",array[1]);
+                        startActivity(i);
+
                     }
                 })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -160,6 +168,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
+
         //------------------------------------------------------------------------------------------------------
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);// manipulacion de localizacion
