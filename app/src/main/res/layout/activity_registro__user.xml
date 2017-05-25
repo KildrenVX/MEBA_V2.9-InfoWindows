@@ -35,7 +35,7 @@
                 android:ems="10"
                 android:hint="Nombre"
                 android:inputType="textPersonName"
-                android:text="a" />
+                />
 
             <EditText
                 android:id="@+id/sexo"
@@ -44,7 +44,7 @@
                 android:ems="10"
                 android:hint="Sexo"
                 android:inputType="text"
-                android:text="a"/>
+                />
 
             <EditText
                 android:id="@+id/mailregis"
@@ -54,7 +54,7 @@
                 android:ems="10"
                 android:hint="Correo"
                 android:inputType="textEmailAddress"
-                android:text="a"/>
+                />
 
             <EditText
                 android:id="@+id/pass"
@@ -64,7 +64,7 @@
                 android:ems="10"
                 android:hint="Contraseña"
                 android:inputType="textPassword"
-                android:text="a"/>
+                />
 
             <EditText
                 android:id="@+id/passr2"
@@ -74,7 +74,7 @@
                 android:ems="10"
                 android:hint="Confirme su contraseña"
                 android:inputType="textPassword"
-                android:text="a"/>
+                />
 
             <EditText
                 android:id="@+id/edadr"
@@ -84,7 +84,7 @@
                 android:ems="10"
                 android:hint="Edad"
                 android:inputType="text"
-                android:text="a"/>
+                />
 
             <Button
                 android:id="@+id/btnRegistrar"
