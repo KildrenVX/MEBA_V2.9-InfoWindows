@@ -63,7 +63,7 @@ public class Registro_User extends AppCompatActivity  {
         RequestParams parametros = new RequestParams();
         parametros.put("Nombre", txtNombre.getText().toString());
         parametros.put("Pass", txtPass.getText().toString());
-        parametros.put("Edad", txtEdad.getText().toString());
+        parametros.put("Edad", Integer.parseInt(txtEdad.getText().toString()));
         parametros.put("Correo", txtCorreo.getText().toString());
         parametros.put("Sexo", txtSexo.getText().toString());
 
