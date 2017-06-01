@@ -98,7 +98,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
         // ____________________________CARGAR_PI________________________________________________________________________________________
 
-        for (int i =1;i<=10;i++)
+        for (int i =1;i<=100;i++)
         {
             Marcadores m = new Marcadores();
             m.CargarPI(i,mMap);
@@ -151,8 +151,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                         String[] array = sCadena.split(",");
                         Log.e("valor de Latitud",array[0]);
                         Log.e("Valor Longitud  ",array[1]);
-                        i.putExtra("latitud",array[0]);
-                        i.putExtra("longitud",array[1]);
+                        String la = array[0];
+                        String ln = array[1];
+                        i.putExtra("latitud",la);
+                        i.putExtra("longitud",ln);
                         startActivity(i);
 
                     }
@@ -262,7 +264,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location) {
 
         //mMap.clear();
-        for (int i =1;i<=10;i++)
+        for (int i =1;i<=100;i++)
         {
             Marcadores m = new Marcadores();
             m.CargarPI(i,mMap);

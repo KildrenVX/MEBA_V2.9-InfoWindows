@@ -7,13 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.m.meba_v2.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,40 +33,94 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
     private ExpandableListAdapter listAdapter;
     private List<String> ListaDatHaper;
     private HashMap<String,List<String>> listHash;
-    Button btnAgregarPI,BtnCancelar;
+    ImageButton addPI;
+    EditText titulos,descrip;
+    String file;
+    double lat,lng,val;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar__pi);
-
-        Agregar();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        BtnCancelar = (Button)findViewById(R.id.CANCELARPI);
-        btnAgregarPI=(Button)findViewById(R.id.AGREGARPI);
+        String Lat = getIntent().getStringExtra("latitud");
+        String Lng = getIntent().getStringExtra("longitud");
+        lat = Double.parseDouble(Lat);
+        lng = Double.parseDouble(Lng);
 
-        listView =(ExpandableListView)findViewById(R.id.Listas);
-        initData();
+        Log.e("Latitud:",Lat);
+        Log.e("Longitud:",Lng);
+
+        addPI = (ImageButton)findViewById(R.id.agrepi);
+        titulos = (EditText)findViewById(R.id.Titulo);
+        descrip = (EditText)findViewById(R.id.descripcion);
+        val=3;
+
+
+        addPI.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                try {
+                    AgregarJson();
+                    Intent intent = new Intent(Agregar_PI.this,MainActivity.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e("error json", e.toString());
+                }
+
+            }
+        });
+
+
+
+
+        //listView =(ExpandableListView)findViewById(R.id.Listas);
+       // initData();
         //listAdapter = new ExpandableListAdapter(this,ListaDatHaper,listHash);
-        listView.setAdapter(listAdapter);
+        //listView.setAdapter(listAdapter);
 
        // btnAgregarPI.setOnClickListener(this);
     }
 
-    public void Agregar()
+    public void AgregarJson()
     {
 
-        String la[] = new String[0];
-        String lo[] = new String[0];
-//         la[0] = String.valueOf(getIntent().getStringArrayExtra("latitud"));
-  //       lo[0] = String.valueOf(getIntent().getStringArrayExtra("longitud"));
-        Log.e("LAT",la.toString());
-        Log.e("LOG",lo.toString());
+        AsyncHttpClient client = new AsyncHttpClient();
+        String url ="http://meba.esy.es/meba_connect/Crear_punto_interes.php?";
+        RequestParams params = new RequestParams();
+        params.put("Titulo",titulos.getText().toString());
+        params.put("Descripcion",descrip.getText().toString());
+        params.put("Valorizacion",val);
+        params.put("Archivo",file);
+        params.put("Latitud",lat);
+        params.put("Longitud",lng);
+
+
+
+        client.post(url, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                if(statusCode==200){
+                    Log.i("json", new String(responseBody));
+                    Log.i("status", Integer.toString(statusCode));
+                    Toast.makeText(Agregar_PI.this, "Punto de interes agregado", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                Log.i("status",Integer.toString(statusCode));
+                Log.i("Responsebody",responseBody.toString());
+                Log.i("error",error.toString());
+            }
+        });
 
     }
 
-    private void initData() {
+ /*   private void initData() {
         ListaDatHaper = new ArrayList<>();
         listHash = new HashMap<>();
 
@@ -70,7 +132,7 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
 
         listHash.put(ListaDatHaper.get(0),categorias);
 
-    }
+    }*/
 
 /*
     @Override

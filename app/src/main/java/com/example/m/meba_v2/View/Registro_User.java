@@ -60,14 +60,14 @@ public class Registro_User extends AppCompatActivity  {
         AsyncHttpClient client = new AsyncHttpClient();
         String url="http://meba.esy.es/meba_connect/Crear_Usuario.php?";
 
-        RequestParams parametros = new RequestParams();
+        RequestParams parametros = new RequestParams();//enviar parametros a la URL
         parametros.put("Nombre", txtNombre.getText().toString());
         parametros.put("Pass", txtPass.getText().toString());
         parametros.put("Edad", Integer.parseInt(txtEdad.getText().toString()));
         parametros.put("Correo", txtCorreo.getText().toString());
         parametros.put("Sexo", txtSexo.getText().toString());
 
-        client.post(url, parametros, new AsyncHttpResponseHandler() {
+        client.post(url, parametros, new AsyncHttpResponseHandler() { //
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 200){
@@ -84,5 +84,7 @@ public class Registro_User extends AppCompatActivity  {
                 Log.i("error",error.toString());
             }
         });
+
+
     }
 }
