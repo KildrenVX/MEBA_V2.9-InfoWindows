@@ -320,6 +320,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(this, "Info window clicked",
                 Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this,Ver_PuntoDeInteres.class);
+        String titulo,descripcion;
+        titulo=marker.getTitle().toString();
+        descripcion=marker.getSnippet().toString();
+        i.putExtra("Titulo", titulo);
+        i.putExtra("Descripcion", descripcion);
         startActivity(i);
     }
 
