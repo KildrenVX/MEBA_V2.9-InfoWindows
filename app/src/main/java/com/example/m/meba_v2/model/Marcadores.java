@@ -23,7 +23,7 @@ public class Marcadores {
     public int CargarPI(int ID,  final GoogleMap mMap)
     {
 
-        //conexion a http
+        //conexion a http Conexion/ve_persona.php?ID=
         AsyncHttpClient client = new AsyncHttpClient();
         String url="http://meba.esy.es/meba_connect/Buscar_punto_interes_por_id.php?ID="+ID;
         client.post(url, null, new AsyncHttpResponseHandler() {
@@ -34,7 +34,7 @@ public class Marcadores {
                     try {
 
                         JSONArray jsonArray = new JSONArray(resul);
-                        String ID = jsonArray.getJSONObject(0).getString("PunId");
+                        int ids = jsonArray.getJSONObject(0).getInt("PunId");
                         double lat = jsonArray.getJSONObject(0).getDouble("PunLatitud");
                         double log = jsonArray.getJSONObject(0).getDouble("PunLongitud");
                         String Titulo = jsonArray.getJSONObject(0).getString("PunTitulo");
@@ -64,7 +64,7 @@ public class Marcadores {
                          Punto.add(valor);*/
 
                     } catch (Exception e) {
-                        Log.e("error", e.toString());
+                        Log.e("error aqui ->", e.toString());
                     }
                 }
             }

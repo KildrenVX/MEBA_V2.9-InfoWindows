@@ -30,12 +30,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener/* ,GoogleMap.InfoWindowAdapter, GoogleMap.OnInfoWindowClickListener*/ {
+        LocationListener ,GoogleMap.OnInfoWindowClickListener {
     //  AlertDialog.Builder alerta = new AlertDialog.Builder(this);
 
     private GoogleMap mMap;
@@ -103,6 +104,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             Marcadores m = new Marcadores();
             m.CargarPI(i,mMap);
         }
+        LatLng marquer = new LatLng(-33.353105, -70.735807);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.title("Marcador");
+        markerOptions.position(marquer);
+        mMap.addMarker(new MarkerOptions().position(marquer).title("Marcador").snippet("descripcion"));
+        mMap.setOnInfoWindowClickListener(this);
+
 //__________________________________________________________________________________________________________________________________________
 
 
@@ -307,40 +315,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    //-------------------CARGA_UN_INFO_WINDOWS----------------------------------------------------
-   /* @Override
-    public View getInfoWindow(Marker marker) {
-
-
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.info_windows,null,false);
-        TextView titulo,descripcion;
-        titulo=(TextView) view.findViewById(R.id.txtTitulo);
-        descripcion = (TextView) view.findViewById(R.id.txtDescripcion);
-        view.findViewById(R.id.txtDireccion);
-
-        return  view;
-    }
-//--------------------------------------------------------------------------------------------
-
-    //----------------------CONTENIDO_DEL_INFO_WINDOWS--------------------------------------------
-    @Override
-    public View getInfoContents(Marker marker) {
-        return null;
-    }
-//---------------------------------------------------------------------------------------------
-
-    //--------------------ACCION_AL_TOCAR:EL_INFO_WINDOWS-------------------------------------------
     @Override
     public void onInfoWindowClick(Marker marker) {
-        //accion al tocar el info windows
-        Toast.makeText(this, "mostrar detalle del punto de interes ", Toast.LENGTH_LONG).show();
-        try {
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        Toast.makeText(this, "Info window clicked",
+                Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this,Ver_PuntoDeInteres.class);
+        startActivity(i);
+    }
 
 
-    }*/
 }
 

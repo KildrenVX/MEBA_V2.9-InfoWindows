@@ -56,19 +56,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Ver_PuntoDeInteres"
-                  android:parentActivityName=".View.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".View.MainActivity" />
-        </activity>
-
-        <activity android:name=".View.Agregar_PI"
+        <activity
+            android:name=".View.Ver_PuntoDeInteres"
             android:parentActivityName=".View.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".View.MainActivity" />
         </activity>
+        <activity
+            android:name=".View.Agregar_PI"
+            android:parentActivityName=".View.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".View.MainActivity" />
+        </activity>
+        <activity android:name=".View.Registro_anecdota"></activity>
     </application>
 
 </manifest>

@@ -63,8 +63,8 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
             public void onClick(View v) {
                 try {
                     AgregarJson();
-                    Intent intent = new Intent(Agregar_PI.this,MainActivity.class);
-                    startActivity(intent);
+                   // Intent intent = new Intent(Agregar_PI.this,MainActivity.class);
+                    //startActivity(intent);
                 } catch (Exception e) {
                     Log.e("error json", e.toString());
                 }
@@ -87,7 +87,9 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
     {
 
         AsyncHttpClient client = new AsyncHttpClient();
+        //String url ="http://meba.esy.es/meba_connect/Crear_punto_interes.php?";
         String url ="http://meba.esy.es/meba_connect/Crear_punto_interes.php?";
+        //192.168.0.12
         RequestParams params = new RequestParams();
         params.put("Titulo",titulos.getText().toString());
         params.put("Descripcion",descrip.getText().toString());
@@ -95,7 +97,6 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
         params.put("Archivo",file);
         params.put("Latitud",lat);
         params.put("Longitud",lng);
-
 
 
         client.post(url, params, new AsyncHttpResponseHandler() {
@@ -113,8 +114,8 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
                 Log.i("status",Integer.toString(statusCode));
-                Log.i("Responsebody",responseBody.toString());
-                Log.i("error",error.toString());
+               // Log.i("Responsebody",responseBody.toString());
+                Log.i("error paso algo D:",error.toString());
             }
         });
 

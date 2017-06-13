@@ -15,12 +15,14 @@
             style="@style/Titulo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/NamePI" />
+            android:text="@string/NamePI"
+            android:textSize="36sp"
+            tools:text="Titulo" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="301dp"
-            android:layout_height="222dp"
+            android:layout_width="252dp"
+            android:layout_height="192dp"
             app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
 
         <RatingBar
@@ -32,7 +34,8 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="116dp"
-            android:text="@string/ParrafoPI" />
+            android:text="@string/ParrafoPI"
+            tools:text="Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  Texto  " />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -52,10 +55,10 @@
                 android:id="@+id/VerAnec"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginEnd="49dp"
-                app:srcCompat="@drawable/globo" />
+                app:srcCompat="@drawable/globo"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
     </LinearLayout>
 
