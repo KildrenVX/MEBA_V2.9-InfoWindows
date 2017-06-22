@@ -50,16 +50,18 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="27dp"
-                app:srcCompat="@drawable/agregar" />
+                android:onClick="addAnec"
+                app:srcCompat="@drawable/add_anecdota" />
 
             <ImageButton
                 android:id="@+id/VerAnec"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginEnd="49dp"
-                app:srcCompat="@drawable/globo"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_marginEnd="49dp"
+                android:onClick="veranecdota"
+                app:srcCompat="@drawable/ver_anecdota" />
         </RelativeLayout>
     </LinearLayout>
 

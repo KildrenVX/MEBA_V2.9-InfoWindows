@@ -88,7 +88,7 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
 
         AsyncHttpClient client = new AsyncHttpClient();
         //String url ="http://meba.esy.es/meba_connect/Crear_punto_interes.php?";
-        String url ="http://meba.esy.es/meba_connect/Crear_punto_interes.php?";
+        String url ="http://192.168.43.104/meba_connect/Crear_punto_interes.php?";
         //192.168.0.12
         RequestParams params = new RequestParams();
         params.put("Titulo",titulos.getText().toString());

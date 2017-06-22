@@ -60,8 +60,8 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@android:drawable/list_selector_background"
         app:srcCompat="@drawable/agregarpibuton_xhdpi"
+        android:layout_marginBottom="19dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/TituloPI"
-        android:layout_marginBottom="29dp" />
+        android:layout_alignEnd="@+id/Addfile" />
 
 </RelativeLayout>

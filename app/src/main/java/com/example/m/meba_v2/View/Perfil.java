@@ -61,7 +61,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener{
      public void ObjDatos(int ID){
          //conexion a http
          AsyncHttpClient client = new AsyncHttpClient();
-         String url="http://meba.esy.es/meba_connect/get_User_Id.php?ID="+ID;
+         String url="http://192.168.43.104/meba_connect/get_User_Id.php?ID="+ID;
             Log.e("url",url.toString());
          //envio de parametros
          //RequestParams parametros = new RequestParams();

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.m.meba_v2.View.Agregar_PI"
+    tools:context="com.example.m.meba_v2.View.Registro_anecdota"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -47,31 +47,35 @@
         android:id="@+id/Addfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="55dp"
         android:backgroundTint="@color/colorAccent"
         android:text="Agregar Archivo"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:layout_below="@+id/descripcionAne"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/Categoria"
+        android:layout_centerHorizontal="true"
+        android:onClick=""
+        />
 
     <ImageButton
-        android:id="@+id/agrepi"
+        android:id="@+id/add_amec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:drawable/list_selector_background"
-        app:srcCompat="@drawable/agregarpibuton_xhdpi"
+        app:srcCompat="@drawable/add_anecdota"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/TituloPI"
-        android:layout_marginBottom="29dp" />
+        android:layout_centerHorizontal="true"
+
+        />
 
     <Spinner
         android:id="@+id/Categoria"
         android:text="categoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="21dp"
         android:layout_below="@+id/descripcionAne"
         android:layout_alignStart="@+id/descripcionAne"
-        android:layout_alignEnd="@+id/agrepi" />
+        android:layout_alignEnd="@+id/descripcionAne" />
 
 </RelativeLayout>

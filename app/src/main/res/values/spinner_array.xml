@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="opciones">
+        <item>Ciencia y tecnologia</item>
+        <item>Arte</item>
+        <item>Deporte</item>
+        <item>Educación</item>
+        <item>Medio ambiente</item>
+        <item>Social</item>
+
+
+    </string-array>
+</resources>

@@ -1,8 +1,10 @@
 package com.example.m.meba_v2.View;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,5 +30,17 @@ public class Ver_PuntoDeInteres extends AppCompatActivity {
         Titu.setText(Titulo);
         Desc.setText(Descrip);
 
+    }
+
+    public void addAnec (View view)
+    {
+        Intent i = new Intent(this,Registro_anecdota.class);
+        startActivity(i);
+    }
+
+    public void veranecdota (View view)
+    {
+        Intent i = new Intent(this,Anecdota.class);
+        startActivity(i);
     }
 }

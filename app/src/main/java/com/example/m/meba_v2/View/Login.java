@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
     public void json(String Correo, String Pass){
         //conexion a http
         AsyncHttpClient client = new AsyncHttpClient();
-        String url="http://meba.esy.es/meba_connect/login.php?Correo="+Correo+"&Pass="+Pass;
+        String url="http://192.168.43.104/meba_connect/login.php?Correo="+Correo+"&Pass="+Pass;
         Log.e("probando y que saen", url.toString());
         //envio de parametros
         //RequestParams parametros = new RequestParams();

@@ -99,17 +99,18 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
         // ____________________________CARGAR_PI________________________________________________________________________________________
 
-        for (int i =1;i<=100;i++)
-        {
+        for (int i =1;i<=50;i++) {
             Marcadores m = new Marcadores();
-            m.CargarPI(i,mMap);
+            m.CargarPI(i, mMap);
         }
-        LatLng marquer = new LatLng(-33.353105, -70.735807);
+
+        mMap.setOnInfoWindowClickListener(this);
+        /*LatLng marquer = new LatLng(-33.353105, -70.735807);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.title("Marcador");
         markerOptions.position(marquer);
         mMap.addMarker(new MarkerOptions().position(marquer).title("Marcador").snippet("descripcion"));
-        mMap.setOnInfoWindowClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);*/
 
 //__________________________________________________________________________________________________________________________________________
 
@@ -272,11 +273,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location) {
 
         //mMap.clear();
-        for (int i =1;i<=100;i++)
+      /*  for (int i =1;i<=3;i++)
         {
             Marcadores m = new Marcadores();
             m.CargarPI(i,mMap);
-        }
+        }*/
 
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         //abrir en la posicion del marcador con zoom

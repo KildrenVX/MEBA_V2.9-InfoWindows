@@ -70,7 +70,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".View.MainActivity" />
         </activity>
-        <activity android:name=".View.Registro_anecdota"></activity>
+        <activity android:name=".View.Registro_anecdota" />
+        <activity android:name=".View.Anecdota" />
     </application>
 
 </manifest>
