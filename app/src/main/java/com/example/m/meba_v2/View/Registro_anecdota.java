@@ -1,5 +1,6 @@
 package com.example.m.meba_v2.View;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,7 +62,7 @@ public class Registro_anecdota extends AppCompatActivity {
     {
 
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://192.168.43.104/meba_connect/Crear_publicacion.php?";
+        String url = "http://192.168.0.14/meba_connect/Crear_publicacion.php?";
 
         RequestParams params = new RequestParams();
         params.put("Titulo",title.getText().toString());
@@ -89,7 +90,8 @@ public class Registro_anecdota extends AppCompatActivity {
             }
         });
 
-
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
 
 
     }

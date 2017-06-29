@@ -25,7 +25,7 @@ public class Marcadores {
 
         //conexion a http Conexion/ve_persona.php?ID=
         AsyncHttpClient client = new AsyncHttpClient();
-        String url="http://192.168.43.104/meba_connect/Buscar_punto_interes_por_id.php?ID="+ID;
+        String url="http://192.168.0.14/meba_connect/Buscar_punto_interes_por_id.php?ID="+ID;
         client.post(url, null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

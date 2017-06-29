@@ -13,7 +13,7 @@ import org.apache.http.Header;
 import org.json.JSONArray;
 
 public class Anecdota extends AppCompatActivity {
-    TextView a,b;
+    TextView txtTitulo,txtDescripcion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +21,11 @@ public class Anecdota extends AppCompatActivity {
 
 
 
-        a = (TextView)findViewById(R.id.TituloAnec);
-        b = (TextView)findViewById(R.id.DescrpAnec);
+
 
 
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://192.168.43.104/meba_connect/Buscar_publicacion_por_id.php?ID="+1;
+        String url = "http://192.168.0.14/meba_connect/Buscar_publicacion_por_id.php?ID=1";
         client.post(url, null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -35,16 +34,21 @@ public class Anecdota extends AppCompatActivity {
                     try {
 
                         JSONArray jsonArray = new JSONArray(resul);
-                        int ids = jsonArray.getJSONObject(0).getInt("PubID");
+                        //int ids = jsonArray.getJSONObject(0).getInt("PubID");
                         String Titulo = jsonArray.getJSONObject(0).getString("PubTitulo");
                         String descrip = jsonArray.getJSONObject(0).getString("PubDescripcion");
                         String valor = jsonArray.getJSONObject(0).getString("PubValorizacion");
-                        String files = jsonArray.getJSONObject(0).getString("PubArchivo");
-                        int idUsu = jsonArray.getJSONObject(0).getInt("Usuario_usuID");
-                        int idCat = jsonArray.getJSONObject(0).getInt("Categorias_CatId");
+                     //   String files = jsonArray.getJSONObject(0).getString("PubArchivo");
+                      //  int idUsu = jsonArray.getJSONObject(0).getInt("Usuario_usuID");
+                       // int idCat = jsonArray.getJSONObject(0).getInt("Categorias_CatId");
+                        Log.e("Titulo: ",Titulo);
+                        Log.e("Descripcion: ",descrip);
 
-                        a.setText(Titulo);
-                        b.setText(descrip);
+                        txtTitulo = (TextView)findViewById(R.id.Titleanec);
+                        txtDescripcion = (TextView)findViewById(R.id.Descrpanecnec);
+
+                        txtTitulo.setText(Titulo);
+                        txtDescripcion.setText(descrip);
 
 
 

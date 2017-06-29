@@ -33,7 +33,7 @@
 
 
             <TextView
-                android:id="@+id/DescrpAnec"
+                android:id="@+id/Descrpanecnec"
                 android:layout_width="match_parent"
                 android:layout_height="116dp"
                 android:layout_alignParentStart="true"
