@@ -19,7 +19,7 @@ public class Ver_PuntoDeInteres extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver__punto_de_interes);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);        
 
         TextView Titu,Desc;
         Titu = (TextView)findViewById(R.id.TitlePI);

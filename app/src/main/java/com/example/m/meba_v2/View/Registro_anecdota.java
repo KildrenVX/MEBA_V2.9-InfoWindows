@@ -62,7 +62,7 @@ public class Registro_anecdota extends AppCompatActivity {
     {
 
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://192.168.0.14/meba_connect/Crear_publicacion.php?";
+        String url = "http://192.168.43.104/meba_connect/Crear_publicacion.php?";
 
         RequestParams params = new RequestParams();
         params.put("Titulo",title.getText().toString());
@@ -77,7 +77,7 @@ public class Registro_anecdota extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode==200)
                 {
-                    Toast.makeText(Registro_anecdota.this,"Anecdota Creada",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Registro_anecdota.this,"Anécdota Creada",Toast.LENGTH_LONG).show();
                 }
             }
 

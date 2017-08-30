@@ -25,7 +25,7 @@ public class Anecdota extends AppCompatActivity {
 
 
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://192.168.0.14/meba_connect/Buscar_publicacion_por_id.php?ID=1";
+        String url = "http://192.168.43.104/meba_connect/Buscar_publicacion_por_id.php?ID=13";
         client.post(url, null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

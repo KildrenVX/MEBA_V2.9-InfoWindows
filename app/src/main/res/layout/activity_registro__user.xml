@@ -25,8 +25,7 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="Registro de Usuario"
-                android:textSize="36sp"
-                />
+                android:textSize="36sp" />
 
             <EditText
                 android:id="@+id/nameregist"
@@ -34,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Nombre"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/sexo"
@@ -43,8 +41,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Sexo"
-                android:inputType="text"
-                />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/mailregis"
@@ -53,8 +50,7 @@
                 android:layout_marginTop="15dp"
                 android:ems="10"
                 android:hint="Correo"
-                android:inputType="textEmailAddress"
-                />
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/pass"
@@ -63,8 +59,7 @@
                 android:layout_marginTop="15dp"
                 android:ems="10"
                 android:hint="Contraseña"
-                android:inputType="textPassword"
-                />
+                android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/passr2"
@@ -73,8 +68,7 @@
                 android:layout_marginTop="15dp"
                 android:ems="10"
                 android:hint="Confirme su contraseña"
-                android:inputType="textPassword"
-                />
+                android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/edadr"
@@ -83,22 +77,26 @@
                 android:layout_marginTop="15dp"
                 android:ems="10"
                 android:hint="Edad"
-                android:inputType="text"
-                />
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/btnRegistrar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Registrarse" />
+                android:background="@color/colorAccent"
+                android:onClick="aClicks"
+                android:text="Registrarse"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
             <Button
                 android:id="@+id/btnCancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Cancelar" />
+                android:backgroundTint="@color/colorAccent"
+                android:text="Cancelar"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
         </LinearLayout>
     </ScrollView>

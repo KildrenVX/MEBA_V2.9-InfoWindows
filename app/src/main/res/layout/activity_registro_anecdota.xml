@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:ems="10"
-        android:hint="Descripccion"
+        android:hint="Descripción"
         android:inputType="textMultiLine"
         android:layout_below="@+id/TituloAnec"
         android:layout_alignStart="@+id/TituloAnec" />

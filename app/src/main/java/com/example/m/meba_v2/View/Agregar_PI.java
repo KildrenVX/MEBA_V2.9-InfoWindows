@@ -88,7 +88,7 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
 
         AsyncHttpClient client = new AsyncHttpClient();
         //String url ="http://meba.esy.es/meba_connect/Crear_punto_interes.php?";
-        String url ="http://192.168.0.14/meba_connect/Crear_punto_interes.php?";
+        String url ="http://192.168.43.104/meba_connect/Crear_punto_interes.php?";
         //192.168.0.12
         RequestParams params = new RequestParams();
         params.put("Titulo",titulos.getText().toString());
@@ -106,7 +106,7 @@ public class Agregar_PI extends AppCompatActivity /*implements View.OnClickListe
                 if(statusCode==200){
                     Log.i("json", new String(responseBody));
                     Log.i("status", Integer.toString(statusCode));
-                    Toast.makeText(Agregar_PI.this, "Punto de interes agregado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Agregar_PI.this, "Punto de interés agregado", Toast.LENGTH_SHORT).show();
                 }
             }
 

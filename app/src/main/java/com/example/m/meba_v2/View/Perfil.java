@@ -38,7 +38,7 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener{
 
         final Intent login = new Intent(this, Login.class);
         asd = (TextView) findViewById(R.id.textView2);
-        btnLog=(Button)findViewById(R.id.btnlog);
+        //btnLog=(Button)findViewById(R.id.btnlog);
         Bundle datos = this.getIntent().getExtras();
         int asd = datos.getInt("datos");
         Log.e("ID",Integer.toString(asd));
@@ -49,19 +49,19 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener{
         }
 
 
-        btnLog.setOnClickListener(new View.OnClickListener() {
+/*        btnLog.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(login);
                 //seba no invente xD
             }
-        });
+        });*/
      }
 
 
      public void ObjDatos(int ID){
          //conexion a http
          AsyncHttpClient client = new AsyncHttpClient();
-         String url="http://192.168.0.14/meba_connect/get_User_Id.php?ID="+ID;
+         String url="http://192.168.43.104/meba_connect/get_User_Id.php?ID="+ID;
             Log.e("url",url.toString());
          //envio de parametros
          //RequestParams parametros = new RequestParams();

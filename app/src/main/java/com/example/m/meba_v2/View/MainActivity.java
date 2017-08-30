@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.m.meba_v2.R;
 import com.example.m.meba_v2.model.Marcadores;
+import com.example.m.meba_v2.model.local;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -44,6 +45,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         checkLocationPermission();
 
@@ -94,6 +97,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
+
+        local l= new local();
+
+        String localhost = l.getLocalhost();
+
+        Log.e("IP DEL EQUIPO= ",localhost);
         mMap=googleMap;
         mMap.setMapType(googleMap.MAP_TYPE_HYBRID);
         mMap.setMyLocationEnabled(true); //activar la localizacion actual del usuario
@@ -113,12 +122,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnInfoWindowClickListener(this);*/
 
 //__________________________________________________________________________________________________________________________________________
-
-
-       /*  LatLng MiCasa = new LatLng(-33.3267245, -70.74691519999999);
-         mMap.addMarker(new MarkerOptions().position(MiCasa).title("Esta es mi casa"));
-         mMap.moveCamera(CameraUpdateFactory.newLatLng(MiCasa));
-         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MiCasa,12));*/
 
         CameraUpdate zoom= CameraUpdateFactory.zoomTo(15);
         mMap.animateCamera(zoom);
@@ -140,7 +143,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
          */
 
         //----Agregar Marcador----------------------------------------------------------------------------------
-        Toast.makeText(this, "Manten presionado en un lugar del mapa para agregar marcador", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Mantén presionado en un lugar del mapa para agregar marcador", Toast.LENGTH_LONG).show();
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener(){
             AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity.this);//dialogo de alerta
             @Override
@@ -148,7 +151,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 //muestra coordenadas de posicion tocada dentro del mapa
                 //Toast.makeText(getApplicationContext(), latLng.toString(), Toast.LENGTH_LONG).show();
                 alerta.setTitle("Nuevo marcador");
-                alerta.setMessage("Crear nuevo marcador aqui? ");
+                alerta.setMessage("¿Crear nuevo marcador aquí? ");
                 alerta.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 

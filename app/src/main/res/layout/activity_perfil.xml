@@ -25,80 +25,33 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="417dp"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/nivel"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="24sp" />
+        <ImageView
+            android:id="@+id/Mail"
+            android:layout_width="128dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:paddingTop="13dp"
+            app:srcCompat="@drawable/mail"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="39dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+        <ImageView
+            android:id="@+id/History"
+            android:layout_width="128dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:paddingTop="13dp"
+            app:srcCompat="@drawable/History"
+            android:layout_marginStart="61dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/Mail"
+            android:layout_marginBottom="93dp" />
+    </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="cursive"
-            android:text="@string/nivelnum"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnlog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:background="@color/colorAccent"
-        android:onClick="Logclick"
-        android:text="Inicio sesión"
-        android:textColor="@color/common_google_signin_btn_text_dark_default" />
-
-    <Button
-        android:id="@+id/edirpefil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:text="@string/Editarp"
-        android:textColor="@color/common_google_signin_btn_text_dark_default" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="27dp"
-        android:orientation="horizontal"></LinearLayout>
-
-    <Button
-        android:id="@+id/verhistorial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:text="@string/Historial"
-        android:textColor="@color/common_google_signin_btn_text_dark_default" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="27dp"
-        android:orientation="horizontal"></LinearLayout>
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:text="@string/mensajes"
-        android:textColor="@color/common_google_signin_btn_text_dark_default" />
-
-    <Button
-        android:id="@+id/Ingreso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ingreso " />
 
 </LinearLayout>

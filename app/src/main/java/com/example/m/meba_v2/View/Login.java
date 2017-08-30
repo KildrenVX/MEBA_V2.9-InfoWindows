@@ -2,6 +2,7 @@ package com.example.m.meba_v2.View;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +19,15 @@ import org.json.JSONArray;
 
 public class Login extends AppCompatActivity {
 
+
+
     public void json(String Correo, String Pass){
         //conexion a http
+
+
         AsyncHttpClient client = new AsyncHttpClient();
-        String url="http://192.168.0.14/meba_connect/login.php?Correo="+Correo+"&Pass="+Pass;
+
+        String url="http://192.168.43.104/meba_connect/login.php?Correo="+Correo+"&Pass="+Pass;
         Log.e("probando y que saen", url.toString());
         //envio de parametros
         //RequestParams parametros = new RequestParams();

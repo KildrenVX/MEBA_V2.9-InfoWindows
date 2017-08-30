@@ -33,6 +33,7 @@ public class Registro_User extends AppCompatActivity  {
         txtConfirmPass = (EditText) findViewById(R.id.passr2);
         txtEdad = (EditText) findViewById(R.id.edadr);
         txtSexo = (EditText) findViewById(R.id.sexo);
+
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
 
@@ -56,36 +57,50 @@ public class Registro_User extends AppCompatActivity  {
         });
     }
 
+    public void aClicks(View view)
+     {
+         json();
+     }
     public void json(){
-        AsyncHttpClient client = new AsyncHttpClient();
-        //String url="http://meba.esy.es/meba_connect/Crear_Usuario.php?";
-        String url="http://192.168.0.14/meba_connect/Crear_Usuario.php?";
 
-        //192.168.0.12
-        RequestParams parametros = new RequestParams();//enviar parametros a la URL
-        parametros.put("Nombre", txtNombre.getText().toString());
-        parametros.put("Pass", txtPass.getText().toString());
-        parametros.put("Edad", Integer.parseInt(txtEdad.getText().toString()));
-        parametros.put("Correo", txtCorreo.getText().toString());
-        parametros.put("Sexo", txtSexo.getText().toString());
+            AsyncHttpClient client = new AsyncHttpClient();
+            //String url="http://meba.esy.es/meba_connect/Crear_Usuario.php?";
+            String url="http://192.168.43.104/meba_connect/Crear_Usuario.php?";
 
-        client.post(url, parametros, new AsyncHttpResponseHandler() { //
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if (statusCode == 200){
-                    Log.i("json", new String(responseBody));
-                    Log.i("status", Integer.toString(statusCode));
-                    Toast.makeText(Registro_User.this, "Usuario Creado Exitosamente", Toast.LENGTH_SHORT).show();
-                }
-            }
+            //192.168.0.12
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.i("status",Integer.toString(statusCode));
-                Log.i("Responsebody",responseBody.toString());
-                Log.i("error",error.toString());
-            }
-        });
+
+
+                RequestParams parametros = new RequestParams();//enviar parametros a la URL
+                parametros.put("Nombre", txtNombre.getText().toString());
+                parametros.put("Pass", txtPass.getText().toString());
+                parametros.put("Edad", Integer.parseInt(txtEdad.getText().toString()));
+                parametros.put("Correo", txtCorreo.getText().toString());
+                parametros.put("Sexo", txtSexo.getText().toString());
+
+
+
+
+                    Toast.makeText(Registro_User.this,"Ingrece los valores correspondientes",Toast.LENGTH_LONG).show();
+
+                    client.post(url, parametros, new AsyncHttpResponseHandler() { //
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            if (statusCode == 200){
+                                Log.i("json", new String(responseBody));
+                                Log.i("status", Integer.toString(statusCode));
+                                Toast.makeText(Registro_User.this, "Usuario Creado Exitosamente", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            Log.i("status",Integer.toString(statusCode));
+                            Log.i("Responsebody",responseBody.toString());
+                            Log.i("error",error.toString());
+                        }
+                    });
+
 
 
     }
